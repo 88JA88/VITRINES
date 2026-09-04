@@ -4,11 +4,16 @@ const objectList = document.querySelector('#object-list');
 const searchInput = document.querySelector('#object-search');
 const countBadge = document.querySelector('#count-badge');
 const catalogueCount = document.querySelector('#catalogue-count');
+const storageStatus = document.querySelector('#storage-status');
+const backupButton = document.querySelector('#backup-button');
+const restoreButton = document.querySelector('#restore-button');
+const restoreInput = document.querySelector('#restore-input');
 const catalogueMessage = document.querySelector('#catalogue-message');
 const selectionContent = document.querySelector('#selection-content');
 const shelfGrid = document.querySelector('#shelf-grid');
 const planTitle = document.querySelector('#plan-title');
 const selectionSummary = document.querySelector('#selection-summary');
+const presentStrip = document.querySelector('#present-strip');
 const placeButton = document.querySelector('#place-button');
 const moveButton = document.querySelector('#move-button');
 const removeButton = document.querySelector('#remove-button');
@@ -22,9 +27,11 @@ let shelf = 'E4';
 let selectedZones = [];
 let dragStart = null;
 let placements = [];
+let reservedIds = new Set();
 
 const rows = ['A', 'B', 'C', 'D', 'E'];
 const columns = [1, 2, 3, 4, 5];
+const storageKey = '0_VITRINES:placements:v2';
 
 function objectNumber(id) {
   return Number(id.replace('OBJ-', ''));
@@ -46,6 +53,86 @@ function placementFor(id) {
   return placements.find((placement) => placement.objectId === id) || null;
 }
 
+function hasActivePlacement(id) {
+  return placements.some((placement) => placement.objectId === id);
+}
+
+function setStorageStatus(message) {
+  storageStatus.textContent = message;
+}
+
+function stateForExport() {
+  return {
+    formatVersion: 1,
+    placements: [
+      ...placements.map((placement) => ({
+        id: placement.objectId, state: 'place', cabinet: placement.cabinet, shelf: placement.shelf,
+        zones: [...placement.zones], displayZone: placement.displayZone,
+      })),
+      ...[...reservedIds].map((id) => ({ id, state: 'reserve' })),
+    ],
+  };
+}
+
+function chooseDisplayZone(cabinetName, shelfName, zones, ignoredId = null) {
+  const counts = new Map(zones.map((zone) => [zone, 0]));
+  for (const placement of placements) {
+    if (placement.objectId !== ignoredId && placement.cabinet === cabinetName && placement.shelf === shelfName && counts.has(placement.displayZone)) {
+      counts.set(placement.displayZone, counts.get(placement.displayZone) + 1);
+    }
+  }
+  return zones.reduce((leastBusy, zone) => counts.get(zone) < counts.get(leastBusy) ? zone : leastBusy);
+}
+
+function parseState(state) {
+  const catalogueIds = new Set(catalogue.map((item) => item.id));
+  const validZones = new Set(rows.flatMap((row) => columns.map((column) => `${row}${column}`)));
+  if (state?.formatVersion !== 1 || !Array.isArray(state.placements)) throw new Error('Format invalide');
+  const ids = new Set();
+  const restoredPlacements = [];
+  const restoredReserve = new Set();
+  for (const entry of state.placements) {
+    if (!catalogueIds.has(entry?.id) || ids.has(entry.id)) throw new Error('Identifiant invalide');
+    ids.add(entry.id);
+    if (entry.state === 'reserve') { restoredReserve.add(entry.id); continue; }
+    if (entry.state !== 'place' || !['V1', 'V2'].includes(entry.cabinet) || !['F', 'E1', 'E2', 'E3', 'E4'].includes(entry.shelf)
+      || !Array.isArray(entry.zones) || entry.zones.length === 0 || entry.zones.some((zone) => !validZones.has(zone)) || new Set(entry.zones).size !== entry.zones.length
+      || !entry.zones.includes(entry.displayZone)) throw new Error('Placement invalide');
+    restoredPlacements.push({ objectId: entry.id, cabinet: entry.cabinet, shelf: entry.shelf, zones: [...entry.zones], displayZone: entry.displayZone });
+  }
+  return { placements: restoredPlacements, reserve: restoredReserve };
+}
+
+function savePlacementState() {
+  try {
+    window.localStorage.setItem(storageKey, JSON.stringify(stateForExport()));
+    setStorageStatus('✓ Enregistré');
+    return true;
+  } catch {
+    setStorageStatus('Non enregistré');
+    return false;
+  }
+}
+
+function restorePlacementState() {
+  placements = [];
+  reservedIds = new Set();
+
+  try {
+    const rawState = window.localStorage.getItem(storageKey);
+    if (!rawState) return;
+
+    const restored = parseState(JSON.parse(rawState));
+    placements = restored.placements;
+    reservedIds = restored.reserve;
+    setStorageStatus('✓ Enregistré');
+  } catch {
+    placements = [];
+    reservedIds = new Set();
+    setStorageStatus('Données locales ignorées');
+  }
+}
+
 function placementLabel(placement) {
   if (!placement) return 'Réserve';
   const firstZone = placement.zones[0];
@@ -56,9 +143,53 @@ function placementLabel(placement) {
 
 function updatePlaceButton() {
   const placement = placementFor(selectedId);
-  placeButton.disabled = !selectedId || selectedZones.length === 0 || Boolean(placement);
+  placeButton.disabled = !selectedId || selectedZones.length === 0 || hasActivePlacement(selectedId);
   moveButton.disabled = !selectedId || selectedZones.length === 0 || !placement;
   removeButton.disabled = !placement;
+}
+
+function renderPresentStrip() {
+  presentStrip.replaceChildren();
+  if (selectedZones.length === 0) return;
+
+  const relevantPlacements = placements.filter((placement) => (
+    placement.cabinet === cabinet
+    && placement.shelf === shelf
+    && placement.zones.some((zone) => selectedZones.includes(zone))
+  ));
+  const objectIds = [...new Set(relevantPlacements.map((placement) => placement.objectId))];
+
+  objectIds.forEach((id, index) => {
+    const item = catalogue.find((candidate) => candidate.id === id);
+    if (!item) return;
+
+    if (index % 3 === 0) {
+      const group = document.createElement('div');
+      group.className = 'present-group';
+      presentStrip.append(group);
+    }
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'present-object';
+    button.title = `${objectNumber(item.id)} — ${item.designation}`;
+
+    const image = document.createElement('img');
+    image.src = photoPath(item);
+    image.alt = '';
+
+    const number = document.createElement('span');
+    number.className = 'present-number';
+    number.textContent = objectNumber(item.id);
+
+    const designation = document.createElement('span');
+    designation.className = 'present-name';
+    designation.textContent = item.designation;
+
+    button.append(image, number, designation);
+    button.addEventListener('click', () => selectObject(item.id));
+    presentStrip.lastElementChild.append(button);
+  });
 }
 
 function visibleObjects() {
@@ -184,7 +315,21 @@ function renderPlan() {
 
   cabinetButtons.forEach((button) => button.classList.toggle('active', button.dataset.cabinet === cabinet));
   shelfButtons.forEach((button) => button.classList.toggle('active', button.dataset.shelf === shelf));
+  renderPresentStrip();
   shelfGrid.replaceChildren();
+
+  const visiblePlacementsByZone = new Map();
+  for (const row of rows) {
+    for (const column of columns) visiblePlacementsByZone.set(`${row}${column}`, []);
+  }
+  const surfacePlacements = placements.filter((placement) => (
+    placement.cabinet === cabinet && placement.shelf === shelf
+  ));
+
+  for (const placement of surfacePlacements) {
+    const targetZone = placement.zones.includes(placement.displayZone) ? placement.displayZone : placement.zones[0];
+    if (visiblePlacementsByZone.has(targetZone)) visiblePlacementsByZone.get(targetZone).push(placement);
+  }
 
   for (const row of rows) {
     const gridRow = document.createElement('div');
@@ -209,11 +354,7 @@ function renderPlan() {
       zoneLabel.textContent = zone;
       button.append(zoneLabel);
 
-      const zonePlacements = placements.filter((placement) => (
-        placement.cabinet === cabinet
-        && placement.shelf === shelf
-        && placement.zones.includes(zone)
-      ));
+      const zonePlacements = visiblePlacementsByZone.get(zone);
       if (zonePlacements.length > 0) {
         const objects = document.createElement('div');
         objects.className = 'zone-objects';
@@ -292,13 +433,16 @@ shelfGrid.addEventListener('pointerup', finishSelection);
 shelfGrid.addEventListener('pointercancel', finishSelection);
 
 placeButton.addEventListener('click', () => {
-  if (!selectedId || selectedZones.length === 0 || placementFor(selectedId)) return;
+  if (!selectedId || selectedZones.length === 0 || hasActivePlacement(selectedId)) return;
+  reservedIds.delete(selectedId);
   placements.push({
     objectId: selectedId,
     cabinet,
     shelf,
     zones: [...selectedZones],
+    displayZone: chooseDisplayZone(cabinet, shelf, selectedZones),
   });
+  savePlacementState();
   selectObject(selectedId);
 });
 
@@ -309,14 +453,51 @@ moveButton.addEventListener('click', () => {
   placement.cabinet = cabinet;
   placement.shelf = shelf;
   placement.zones = [...selectedZones];
+  placement.displayZone = chooseDisplayZone(cabinet, shelf, selectedZones, selectedId);
+  savePlacementState();
   selectObject(selectedId);
 });
 
 removeButton.addEventListener('click', () => {
   if (!placementFor(selectedId)) return;
   placements = placements.filter((placement) => placement.objectId !== selectedId);
+  reservedIds.add(selectedId);
   selectedZones = [];
+  savePlacementState();
   selectObject(selectedId);
+});
+
+function downloadState(state, prefix = 'VITRINE') {
+  const date = new Date().toISOString().slice(0, 10);
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `${prefix}-${date}.json`;
+  link.click();
+  URL.revokeObjectURL(url);
+}
+
+backupButton.addEventListener('click', () => downloadState(stateForExport()));
+restoreButton.addEventListener('click', () => restoreInput.click());
+restoreInput.addEventListener('change', async () => {
+  const file = restoreInput.files?.[0];
+  restoreInput.value = '';
+  if (!file) return;
+  try {
+    const restored = parseState(JSON.parse(await file.text()));
+    if (!window.confirm('Remplacer les placements actuels ? Une sauvegarde de sécurité sera téléchargée avant la restauration.')) return;
+    downloadState(stateForExport(), 'VITRINE-AVANT-RESTAURATION');
+    placements = restored.placements;
+    reservedIds = restored.reserve;
+    savePlacementState();
+    selectedId = null;
+    selectedZones = [];
+    renderList();
+    renderPlan();
+  } catch {
+    window.alert('Fichier de restauration invalide : les placements actuels sont conservés.');
+  }
 });
 
 function loadCatalogue() {
@@ -326,7 +507,9 @@ function loadCatalogue() {
     catalogue = [...window.CATALOGUE].sort((left, right) => objectNumber(left.id) - objectNumber(right.id));
     countBadge.textContent = catalogue.length;
     catalogueCount.textContent = `${catalogue.length} objets du catalogue`;
+    restorePlacementState();
     renderList();
+    renderPlan();
   } catch (error) {
     countBadge.textContent = '—';
     catalogueCount.textContent = 'Catalogue indisponible';

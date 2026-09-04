@@ -22,6 +22,9 @@ h2 { font-size: 24px; }
 .eyebrow { margin: 0 0 4px; color: #7c8880; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 .topbar .eyebrow { color: #a9c0ba; }
 .catalogue-count { margin: 0 0 0 auto; color: #d2dfdb; font-size: 13px; }
+.storage-status { margin: 0; color: #a9cfc2; font-size: 12px; font-weight: 700; }
+.backup-button, .restore-button { min-height: 38px; padding: 0 12px; border: 1px solid #6b8b84; border-radius: 9px; background: #204c45; color: white; font-size: 12px; font-weight: 700; cursor: pointer; }
+.backup-button:hover, .restore-button:hover { background: #2b5b53; }
 
 .workspace { min-height: calc(100vh - 78px); display: grid; grid-template-columns: 290px minmax(560px, 1fr) 300px; overflow-x: auto; }
 .catalogue-panel, .selection-panel { min-height: 0; padding: 28px 22px; background: var(--paper); }
@@ -51,8 +54,16 @@ h2 { font-size: 24px; }
 .segmented, .shelf-tabs { display: flex; gap: 4px; padding: 4px; border-radius: 11px; background: #e9e5db; }
 .segmented button, .shelf-tabs button { padding: 8px 13px; border: 0; border-radius: 8px; background: transparent; color: #68716c; font-size: 12px; font-weight: 700; cursor: pointer; }
 .segmented button.active, .shelf-tabs button.active { background: var(--paper); color: #184a42; box-shadow: 0 1px 5px #24312d18; }
-.plan-heading { display: flex; justify-content: space-between; margin-bottom: 12px; }
+.plan-heading { display: flex; align-items: flex-start; justify-content: flex-start; gap: 8px; margin-bottom: 12px; }
 .plan-heading h2 { font-size: 28px; }
+.present-strip { min-width: 0; flex: 1; display: flex; align-items: center; gap: 5px; overflow-x: auto; padding: 2px; -webkit-overflow-scrolling: touch; }
+.present-group { display: flex; flex: 0 0 auto; flex-direction: column; gap: 3px; }
+.present-empty { color: var(--muted); font-size: 10px; font-style: italic; white-space: nowrap; }
+.present-object { min-width: 0; height: 34px; display: grid; grid-template-columns: 28px auto minmax(0, 118px); align-items: center; gap: 4px; flex: 0 0 auto; padding: 2px 5px 2px 2px; border: 1px solid #d8d3c7; border-radius: 7px; background: var(--paper); color: var(--ink); cursor: pointer; text-align: left; }
+.present-object:hover { border-color: #8ca69c; background: #edf4f1; }
+.present-object img { width: 28px; height: 28px; border-radius: 5px; object-fit: contain; }
+.present-number { color: var(--deep-green); font-size: 10px; font-weight: 800; }
+.present-name { overflow: hidden; font-size: 9px; font-weight: 600; line-height: 1.1; text-overflow: ellipsis; white-space: nowrap; }
 .selection-summary { margin: 0 0 12px; color: #397065; font-size: 12px; font-weight: 700; text-align: right; }
 .grid-scroll { overflow-x: auto; padding-bottom: 10px; -webkit-overflow-scrolling: touch; }
 .grid-shell { min-width: 720px; padding: 14px 18px 18px 14px; border: 1px solid #d3cfc3; border-radius: 16px; background: #e9e3d8; box-shadow: inset 0 1px white; }
@@ -68,8 +79,9 @@ h2 { font-size: 24px; }
 .zone-object { position: relative; width: 42px; height: 38px; display: grid; place-items: center; overflow: hidden; border: 1px solid #d6d0c5; border-radius: 7px; background: white; box-shadow: 0 1px 2px #24312d16; }
 .zone-object img { width: 100%; height: 100%; object-fit: contain; }
 .zone-object span { position: absolute; right: 2px; bottom: 2px; min-width: 16px; padding: 2px 3px; border-radius: 5px; background: var(--deep-green); color: white; font-size: 9px; font-weight: 700; line-height: 1; text-align: center; }
-.plan-actions { display: flex; gap: 12px; margin-top: 12px; }
+.object-actions { position: sticky; bottom: 0; display: flex; flex-direction: column; gap: 8px; padding-top: 12px; background: var(--paper); }
 .place-button, .move-button, .remove-button { min-width: 150px; min-height: 42px; padding: 0 18px; border: 1px solid #7ca79b; border-radius: 10px; background: #8fa9a1; color: white; font-weight: 700; cursor: pointer; }
+.object-actions .place-button, .object-actions .move-button, .object-actions .remove-button { width: 100%; text-align: left; }
 .place-button:not(:disabled):hover { background: #78968e; }
 .move-button { border-color: #b7b3a8; background: #f6f3eb; color: var(--ink); }
 .move-button:not(:disabled):hover { background: #ece8de; }

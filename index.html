@@ -14,6 +14,10 @@
         <h1>Plan de vitrine</h1>
       </div>
       <p class="catalogue-count" id="catalogue-count" aria-live="polite">Chargement du Catalogue…</p>
+      <p class="storage-status" id="storage-status" aria-live="polite"></p>
+      <button type="button" class="backup-button" id="backup-button">Sauvegarder</button>
+      <button type="button" class="restore-button" id="restore-button">Restaurer</button>
+      <input id="restore-input" type="file" accept="application/json,.json" hidden>
     </header>
 
     <main class="workspace">
@@ -53,6 +57,7 @@
             <p class="eyebrow">Vue en plan</p>
             <h2 id="plan-title">V1.E4</h2>
           </div>
+          <div class="present-strip" id="present-strip" aria-label="Objets présents sur la surface active"></div>
         </div>
         <p class="selection-summary" id="selection-summary" aria-live="polite">0 zone sélectionnée</p>
         <div class="grid-scroll">
@@ -60,11 +65,6 @@
             <div class="column-labels" aria-hidden="true"><span></span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
             <div class="shelf-grid" id="shelf-grid" aria-label="Zones de la surface sélectionnée"></div>
           </div>
-        </div>
-        <div class="plan-actions">
-          <button type="button" class="place-button" id="place-button" disabled>+ Placer</button>
-          <button type="button" class="move-button" id="move-button" disabled>↔ Déplacer</button>
-          <button type="button" class="remove-button" id="remove-button" disabled>⌑ Retirer</button>
         </div>
       </section>
 
@@ -74,10 +74,15 @@
           <h2 id="selection-title">Choisissez un objet</h2>
           <p>Sélectionnez un objet dans le Catalogue pour afficher sa photo et sa fiche PDF.</p>
         </div>
+        <div class="object-actions">
+          <button type="button" class="place-button" id="place-button" disabled>+ Placer</button>
+          <button type="button" class="move-button" id="move-button" disabled>↔ Déplacer</button>
+          <button type="button" class="remove-button" id="remove-button" disabled>⌑ Retirer</button>
+        </div>
       </aside>
     </main>
 
     <script src="catalogue.js"></script>
-    <script src="app.js?v=3"></script>
+    <script src="app.js?v=4"></script>
   </body>
 </html>
