@@ -9,6 +9,8 @@ const selectionContent = document.querySelector('#selection-content');
 const shelfGrid = document.querySelector('#shelf-grid');
 const planTitle = document.querySelector('#plan-title');
 const selectionSummary = document.querySelector('#selection-summary');
+const placeButton = document.querySelector('#place-button');
+const moveButton = document.querySelector('#move-button');
 const cabinetButtons = document.querySelectorAll('[data-cabinet]');
 const shelfButtons = document.querySelectorAll('[data-shelf]');
 
@@ -18,6 +20,7 @@ let cabinet = 'V1';
 let shelf = 'E4';
 let selectedZones = [];
 let dragStart = null;
+let placements = [];
 
 const rows = ['A', 'B', 'C', 'D', 'E'];
 const columns = [1, 2, 3, 4, 5];
@@ -31,11 +34,29 @@ function filenameFromUrl(url) {
 }
 
 function photoPath(item) {
-  return `photos/${item.id}.jpg`;
+  return `photos/${item.id}.jpg?v=2`;
 }
 
 function pdfPath(item) {
   return `pdf/${filenameFromUrl(item.pdf)}`;
+}
+
+function placementFor(id) {
+  return placements.find((placement) => placement.objectId === id) || null;
+}
+
+function placementLabel(placement) {
+  if (!placement) return 'En réserve';
+  const firstZone = placement.zones[0];
+  const lastZone = placement.zones[placement.zones.length - 1];
+  const zoneLabel = firstZone === lastZone ? firstZone : `${firstZone}-${lastZone}`;
+  return `${placement.cabinet}.${placement.shelf} · ${zoneLabel}`;
+}
+
+function updatePlaceButton() {
+  const placement = placementFor(selectedId);
+  placeButton.disabled = !selectedId || selectedZones.length === 0 || Boolean(placement);
+  moveButton.disabled = !selectedId || selectedZones.length === 0 || !placement;
 }
 
 function visibleObjects() {
@@ -72,11 +93,20 @@ function renderList() {
     image.src = photoPath(item);
     image.alt = '';
 
+    const details = document.createElement('span');
+    details.className = 'object-details';
+
     const designation = document.createElement('span');
     designation.className = 'object-name';
     designation.textContent = item.designation;
 
-    button.append(dot, image, designation);
+    const location = document.createElement('span');
+    location.className = 'object-location';
+    location.textContent = placementLabel(placementFor(item.id));
+
+    details.append(designation, location);
+
+    button.append(dot, image, details);
     button.addEventListener('click', () => selectObject(item.id));
     objectList.append(button);
   }
@@ -86,6 +116,13 @@ function selectObject(id) {
   selectedId = id;
   const item = catalogue.find((candidate) => candidate.id === id);
   if (!item) return;
+
+  const placement = placementFor(id);
+  if (placement) {
+    cabinet = placement.cabinet;
+    shelf = placement.shelf;
+    selectedZones = [...placement.zones];
+  }
 
   selectionContent.className = '';
   selectionContent.replaceChildren();
@@ -104,6 +141,10 @@ function selectObject(id) {
   designation.className = 'selected-designation';
   designation.textContent = item.designation;
 
+  const location = document.createElement('p');
+  location.className = 'selection-note';
+  location.textContent = `Emplacement : ${placementLabel(placementFor(item.id))}`;
+
   const pdfLink = document.createElement('a');
   pdfLink.className = 'pdf-link';
   pdfLink.href = pdfPath(item);
@@ -111,8 +152,9 @@ function selectObject(id) {
   pdfLink.rel = 'noopener';
   pdfLink.textContent = 'Ouvrir la fiche PDF';
 
-  selectionContent.append(title, image, designation, pdfLink);
+  selectionContent.append(title, image, designation, location, pdfLink);
   renderList();
+  renderPlan();
 }
 
 function selectRectangle(start, end) {
@@ -136,6 +178,7 @@ function renderPlan() {
   planTitle.textContent = `${cabinet}.${shelf}`;
   const count = selectedZones.length;
   selectionSummary.textContent = `${count} zone${count > 1 ? 's' : ''} sélectionnée${count > 1 ? 's' : ''}`;
+  updatePlaceButton();
 
   cabinetButtons.forEach((button) => button.classList.toggle('active', button.dataset.cabinet === cabinet));
   shelfButtons.forEach((button) => button.classList.toggle('active', button.dataset.shelf === shelf));
@@ -163,6 +206,34 @@ function renderPlan() {
       zoneLabel.className = 'zone-label';
       zoneLabel.textContent = zone;
       button.append(zoneLabel);
+
+      const zonePlacements = placements.filter((placement) => (
+        placement.cabinet === cabinet
+        && placement.shelf === shelf
+        && placement.zones.includes(zone)
+      ));
+      if (zonePlacements.length > 0) {
+        const objects = document.createElement('div');
+        objects.className = 'zone-objects';
+        for (const placement of zonePlacements) {
+          const item = catalogue.find((candidate) => candidate.id === placement.objectId);
+          if (!item) continue;
+          const object = document.createElement('span');
+          object.className = 'zone-object';
+          object.dataset.objectId = item.id;
+          object.title = `${objectNumber(item.id)} — ${item.designation}`;
+
+          const objectImage = document.createElement('img');
+          objectImage.src = photoPath(item);
+          objectImage.alt = '';
+
+          const objectNumberLabel = document.createElement('span');
+          objectNumberLabel.textContent = objectNumber(item.id);
+          object.append(objectImage, objectNumberLabel);
+          objects.append(object);
+        }
+        button.append(objects);
+      }
       gridRow.append(button);
     }
 
@@ -188,6 +259,14 @@ shelfButtons.forEach((button) => button.addEventListener('click', () => {
 }));
 
 shelfGrid.addEventListener('pointerdown', (event) => {
+  const placedObject = event.target.closest('.zone-object');
+  if (placedObject) {
+    event.preventDefault();
+    event.stopPropagation();
+    selectObject(placedObject.dataset.objectId);
+    return;
+  }
+
   const zone = zoneAtPointer(event);
   if (!zone) return;
   event.preventDefault();
@@ -210,14 +289,32 @@ function finishSelection(event) {
 shelfGrid.addEventListener('pointerup', finishSelection);
 shelfGrid.addEventListener('pointercancel', finishSelection);
 
-async function loadCatalogue() {
-  try {
-    const response = await fetch('catalogue.json');
-    if (!response.ok) throw new Error('Catalogue indisponible');
-    const data = await response.json();
-    if (!Array.isArray(data.objets) || data.objets.length !== 26) throw new Error('Catalogue incomplet');
+placeButton.addEventListener('click', () => {
+  if (!selectedId || selectedZones.length === 0 || placementFor(selectedId)) return;
+  placements.push({
+    objectId: selectedId,
+    cabinet,
+    shelf,
+    zones: [...selectedZones],
+  });
+  selectObject(selectedId);
+});
 
-    catalogue = [...data.objets].sort((left, right) => objectNumber(left.id) - objectNumber(right.id));
+moveButton.addEventListener('click', () => {
+  const placement = placementFor(selectedId);
+  if (!placement || selectedZones.length === 0) return;
+
+  placement.cabinet = cabinet;
+  placement.shelf = shelf;
+  placement.zones = [...selectedZones];
+  selectObject(selectedId);
+});
+
+function loadCatalogue() {
+  try {
+    if (!Array.isArray(window.CATALOGUE) || window.CATALOGUE.length !== 26) throw new Error('Catalogue incomplet');
+
+    catalogue = [...window.CATALOGUE].sort((left, right) => objectNumber(left.id) - objectNumber(right.id));
     countBadge.textContent = catalogue.length;
     catalogueCount.textContent = `${catalogue.length} objets du catalogue`;
     renderList();
