@@ -69,11 +69,13 @@ h2 { font-size: 24px; }
 .zone-object img { width: 100%; height: 100%; object-fit: contain; }
 .zone-object span { position: absolute; right: 2px; bottom: 2px; min-width: 16px; padding: 2px 3px; border-radius: 5px; background: var(--deep-green); color: white; font-size: 9px; font-weight: 700; line-height: 1; text-align: center; }
 .plan-actions { display: flex; gap: 12px; margin-top: 12px; }
-.place-button, .move-button { min-width: 150px; min-height: 42px; padding: 0 18px; border: 1px solid #7ca79b; border-radius: 10px; background: #8fa9a1; color: white; font-weight: 700; cursor: pointer; }
+.place-button, .move-button, .remove-button { min-width: 150px; min-height: 42px; padding: 0 18px; border: 1px solid #7ca79b; border-radius: 10px; background: #8fa9a1; color: white; font-weight: 700; cursor: pointer; }
 .place-button:not(:disabled):hover { background: #78968e; }
 .move-button { border-color: #b7b3a8; background: #f6f3eb; color: var(--ink); }
 .move-button:not(:disabled):hover { background: #ece8de; }
-.place-button:disabled, .move-button:disabled { border-color: #d8d3c7; background: #ece8de; color: #9aa09b; cursor: not-allowed; }
+.remove-button { border-color: #ddc0b8; background: #f5e7e3; color: #87483b; }
+.remove-button:not(:disabled):hover { background: #efdbd5; }
+.place-button:disabled, .move-button:disabled, .remove-button:disabled { border-color: #d8d3c7; background: #ece8de; color: #9aa09b; cursor: not-allowed; }
 
 .selection-empty { padding-top: 9px; }
 .selection-empty h2 { font-size: 21px; line-height: 1.2; }

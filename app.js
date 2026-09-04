@@ -11,6 +11,7 @@ const planTitle = document.querySelector('#plan-title');
 const selectionSummary = document.querySelector('#selection-summary');
 const placeButton = document.querySelector('#place-button');
 const moveButton = document.querySelector('#move-button');
+const removeButton = document.querySelector('#remove-button');
 const cabinetButtons = document.querySelectorAll('[data-cabinet]');
 const shelfButtons = document.querySelectorAll('[data-shelf]');
 
@@ -46,7 +47,7 @@ function placementFor(id) {
 }
 
 function placementLabel(placement) {
-  if (!placement) return 'En réserve';
+  if (!placement) return 'Réserve';
   const firstZone = placement.zones[0];
   const lastZone = placement.zones[placement.zones.length - 1];
   const zoneLabel = firstZone === lastZone ? firstZone : `${firstZone}-${lastZone}`;
@@ -57,6 +58,7 @@ function updatePlaceButton() {
   const placement = placementFor(selectedId);
   placeButton.disabled = !selectedId || selectedZones.length === 0 || Boolean(placement);
   moveButton.disabled = !selectedId || selectedZones.length === 0 || !placement;
+  removeButton.disabled = !placement;
 }
 
 function visibleObjects() {
@@ -307,6 +309,13 @@ moveButton.addEventListener('click', () => {
   placement.cabinet = cabinet;
   placement.shelf = shelf;
   placement.zones = [...selectedZones];
+  selectObject(selectedId);
+});
+
+removeButton.addEventListener('click', () => {
+  if (!placementFor(selectedId)) return;
+  placements = placements.filter((placement) => placement.objectId !== selectedId);
+  selectedZones = [];
   selectObject(selectedId);
 });
 
