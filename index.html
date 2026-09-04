@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Plan de vitrine</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand-mark" aria-hidden="true">▣</div>
+      <div>
+        <p class="eyebrow">Inventaire &amp; emplacement</p>
+        <h1>Plan de vitrine</h1>
+      </div>
+      <p class="catalogue-count" id="catalogue-count" aria-live="polite">Chargement du Catalogue…</p>
+    </header>
+
+    <main class="workspace">
+      <aside class="catalogue-panel" aria-label="Catalogue">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Catalogue</p>
+            <h2>Objets</h2>
+          </div>
+          <span class="count-badge" id="count-badge">—</span>
+        </div>
+
+        <label class="search-box" for="object-search">
+          <span aria-hidden="true">⌕</span>
+          <input id="object-search" inputmode="numeric" autocomplete="off" placeholder="Numéro exact…" aria-label="Rechercher un objet par numéro exact">
+        </label>
+        <p class="catalogue-message" id="catalogue-message" hidden></p>
+        <div class="object-list" id="object-list" aria-label="Liste des objets"></div>
+      </aside>
+
+      <section class="plan-panel" aria-labelledby="plan-title">
+        <div class="plan-toolbar">
+          <div class="segmented" aria-label="Choisir la vitrine">
+            <button type="button" data-cabinet="V1">Vitrine 1</button>
+            <button type="button" data-cabinet="V2">Vitrine 2</button>
+          </div>
+          <div class="shelf-tabs" aria-label="Choisir la surface">
+            <button type="button" data-shelf="F">Fond</button>
+            <button type="button" data-shelf="E1">E1</button>
+            <button type="button" data-shelf="E2">E2</button>
+            <button type="button" data-shelf="E3">E3</button>
+            <button type="button" data-shelf="E4">E4</button>
+          </div>
+        </div>
+        <div class="plan-heading">
+          <div>
+            <p class="eyebrow">Vue en plan</p>
+            <h2 id="plan-title">V1.E4</h2>
+          </div>
+        </div>
+        <p class="selection-summary" id="selection-summary" aria-live="polite">0 zone sélectionnée</p>
+        <div class="grid-scroll">
+          <div class="grid-shell">
+            <div class="column-labels" aria-hidden="true"><span></span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+            <div class="shelf-grid" id="shelf-grid" aria-label="Zones de la surface sélectionnée"></div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="selection-panel" aria-labelledby="selection-title">
+        <p class="eyebrow">Objet sélectionné</p>
+        <div id="selection-content" class="selection-empty">
+          <h2 id="selection-title">Choisissez un objet</h2>
+          <p>Sélectionnez un objet dans le Catalogue pour afficher sa photo et sa fiche PDF.</p>
+        </div>
+      </aside>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
