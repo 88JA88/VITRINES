@@ -1,5 +1,9 @@
 'use strict';
 
+if ('serviceWorker' in navigator && window.isSecureContext) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js'));
+}
+
 const objectList = document.querySelector('#object-list');
 const searchInput = document.querySelector('#object-search');
 const countBadge = document.querySelector('#count-badge');
