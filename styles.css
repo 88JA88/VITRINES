@@ -21,7 +21,8 @@ h1 { font-size: 25px; }
 h2 { font-size: 24px; }
 .eyebrow { margin: 0 0 4px; color: #7c8880; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 .topbar .eyebrow { color: #a9c0ba; }
-.catalogue-count { margin: 0 0 0 auto; color: #d2dfdb; font-size: 13px; }
+.top-actions { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+.catalogue-count { margin: 0; color: #d2dfdb; font-size: 13px; }
 .storage-status { margin: 0; color: #a9cfc2; font-size: 12px; font-weight: 700; }
 .backup-button, .restore-button { min-height: 38px; padding: 0 12px; border: 1px solid #6b8b84; border-radius: 9px; background: #204c45; color: white; font-size: 12px; font-weight: 700; cursor: pointer; }
 .backup-button:hover, .restore-button:hover { background: #2b5b53; }

@@ -13,10 +13,12 @@
         <p class="eyebrow">Inventaire &amp; emplacement</p>
         <h1>Plan de vitrine</h1>
       </div>
-      <p class="catalogue-count" id="catalogue-count" aria-live="polite">Chargement du Catalogue…</p>
-      <p class="storage-status" id="storage-status" aria-live="polite"></p>
-      <button type="button" class="backup-button" id="backup-button">Sauvegarder</button>
-      <button type="button" class="restore-button" id="restore-button">Restaurer</button>
+      <div class="top-actions">
+        <p class="storage-status" id="storage-status" aria-live="polite"></p>
+        <button type="button" class="backup-button" id="backup-button">Sauvegarder</button>
+        <button type="button" class="restore-button" id="restore-button">Restaurer</button>
+        <p class="catalogue-count" id="catalogue-count" aria-live="polite">Chargement du Catalogue…</p>
+      </div>
       <input id="restore-input" type="file" accept="application/json,.json" hidden>
     </header>
 
