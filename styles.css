@@ -39,7 +39,7 @@ h2 { font-size: 24px; }
 .catalogue-filters button.active { background: var(--paper); color: #184a42; box-shadow: 0 1px 5px #24312d18; }
 .catalogue-message { margin: 8px 0; color: var(--muted); font-size: 12px; }
 .object-list { height: 680px; display: flex; flex: none; flex-direction: column; gap: 0; overflow-y: auto; overscroll-behavior: contain; padding-right: 1px; }
-.object-row { width: 100%; min-height: 38px; display: grid; grid-template-columns: 54px 34px minmax(0, 1fr); align-items: center; gap: 5px; padding: 3px 4px; border: 1px solid transparent; border-radius: 6px; background: transparent; color: inherit; text-align: left; cursor: pointer; }
+.object-row { width: 100%; min-height: 38px; display: grid; grid-template-columns: 20px 34px minmax(0, 1fr); align-items: center; gap: 2px; padding: 3px 2px; border: 1px solid transparent; border-radius: 6px; background: transparent; color: inherit; text-align: left; cursor: pointer; }
 .object-row:hover { background: #f4f1e9; }
 .object-row.is-selected { border-color: transparent; background: #2d7467; color: white; }
 .object-row.is-selected .object-id { color: white; }

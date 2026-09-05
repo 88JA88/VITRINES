@@ -296,7 +296,7 @@ function renderList() {
 
     const identifier = document.createElement('span');
     identifier.className = 'object-id';
-    identifier.textContent = item.id;
+    identifier.textContent = objectNumber(item.id);
 
     const image = document.createElement('img');
     image.className = 'list-photo';
@@ -497,8 +497,10 @@ shelfButtons.forEach((button) => button.addEventListener('click', () => {
 }));
 
 planPanel.addEventListener('click', (event) => {
-  if (event.target.closest('.grid-scroll, button')) return;
+  if (event.target.closest('button, a, input, select, textarea, label, [role="button"]')) return;
+  selectedZones = [];
   deselectObject();
+  renderPlan();
 });
 
 shelfGrid.addEventListener('pointerdown', (event) => {
