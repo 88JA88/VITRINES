@@ -5,7 +5,7 @@ if ('serviceWorker' in navigator && window.isSecureContext) {
 }
 
 const objectList = document.querySelector('#object-list');
-const searchInput = document.querySelector('#object-search');
+const catalogueFilterButtons = document.querySelectorAll('[data-catalogue-filter]');
 const countBadge = document.querySelector('#count-badge');
 const catalogueCount = document.querySelector('#catalogue-count');
 const storageStatus = document.querySelector('#storage-status');
@@ -14,10 +14,24 @@ const restoreButton = document.querySelector('#restore-button');
 const restoreInput = document.querySelector('#restore-input');
 const catalogueMessage = document.querySelector('#catalogue-message');
 const selectionContent = document.querySelector('#selection-content');
+const selectionPanel = document.querySelector('.selection-panel');
+const objectHeading = document.querySelector('#object-heading');
+const researchPanel = document.querySelector('#research-panel');
+const researchInput = document.querySelector('#research-input');
+const researchCount = document.querySelector('#research-count');
+const clearResearch = document.querySelector('#clear-research');
+const researchCriteria = document.querySelector('#research-criteria');
+const researchFamilies = [
+  ['nature', 'Nature'], ['epoque', 'Époque'], ['culture', 'Culture'],
+  ['matiere', 'Matière'], ['technique', 'Technique'], ['decor', 'Iconographie / type'],
+];
+const checkedCriteria = new Map(researchFamilies.map(([field]) => [field, new Set()]));
+const planPanel = document.querySelector('.plan-panel');
 const shelfGrid = document.querySelector('#shelf-grid');
 const planTitle = document.querySelector('#plan-title');
 const selectionSummary = document.querySelector('#selection-summary');
 const presentStrip = document.querySelector('#present-strip');
+const objectActions = document.querySelector('.object-actions');
 const placeButton = document.querySelector('#place-button');
 const moveButton = document.querySelector('#move-button');
 const removeButton = document.querySelector('#remove-button');
@@ -25,6 +39,7 @@ const cabinetButtons = document.querySelectorAll('[data-cabinet]');
 const shelfButtons = document.querySelectorAll('[data-shelf]');
 
 let catalogue = [];
+let catalogueFilter = 'all';
 let selectedId = null;
 let cabinet = 'V1';
 let shelf = 'E4';
@@ -196,15 +211,73 @@ function renderPresentStrip() {
   });
 }
 
+function normalizeSearch(value) {
+  return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+}
+
+function updateResearchTitles() {
+  for (const [field, label] of researchFamilies) {
+    const title = researchCriteria.querySelector(`summary[data-family="${field}"]`);
+    const count = checkedCriteria.get(field).size;
+    if (title) title.textContent = count ? `${label} (${count})` : label;
+  }
+}
+
+function renderResearchCriteria() {
+  researchCriteria.replaceChildren();
+  for (const [field, label] of researchFamilies) {
+    const group = document.createElement('details');
+    const legend = document.createElement('summary');
+    legend.dataset.family = field;
+    legend.textContent = label;
+    group.append(legend);
+    const values = [...new Set(catalogue.flatMap((item) => window.RECHERCHE?.[item.id]?.[field] || []))];
+    for (const value of values.sort((a, b) => a.localeCompare(b, 'fr'))) {
+      const option = document.createElement('label');
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.value = value;
+      checkbox.dataset.family = field;
+      checkbox.checked = checkedCriteria.get(field).has(value);
+      checkbox.addEventListener('change', () => {
+        const selected = checkedCriteria.get(field);
+        if (checkbox.checked) selected.add(value);
+        else selected.delete(value);
+        updateResearchTitles();
+        renderList();
+      });
+      option.append(checkbox, document.createTextNode(value));
+      group.append(option);
+    }
+    researchCriteria.append(group);
+  }
+  updateResearchTitles();
+}
+
 function visibleObjects() {
-  const query = searchInput.value.trim();
-  if (!query) return catalogue;
-  if (!/^\d+$/.test(query)) return [];
-  return catalogue.filter((item) => objectNumber(item.id) === Number(query));
+  const text = normalizeSearch(researchInput.value.trim());
+  return catalogue.filter((item) => {
+    const research = window.RECHERCHE?.[item.id];
+    const isPlaced = hasActivePlacement(item.id);
+    return (catalogueFilter === 'all'
+      || (catalogueFilter === 'placed' && isPlaced)
+      || (catalogueFilter === 'reserve' && !isPlaced))
+      && normalizeSearch(`${research?.designation ?? item.designation}\n${research?.particularites ?? ''}`).includes(text)
+      && researchFamilies.every(([field]) => {
+        const selected = checkedCriteria.get(field);
+        return selected.size === 0 || (research?.[field] || []).some((value) => selected.has(value));
+      });
+  });
 }
 
 function renderList() {
   const visible = visibleObjects();
+  catalogueFilterButtons.forEach((button) => {
+    const isActive = button.dataset.catalogueFilter === catalogueFilter;
+    button.classList.toggle('active', isActive);
+    button.setAttribute('aria-pressed', String(isActive));
+  });
+  researchCount.textContent = `${visible.length} objet${visible.length === 1 ? '' : 's'} trouvé${visible.length === 1 ? '' : 's'}`;
   objectList.replaceChildren();
 
   if (visible.length === 0) {
@@ -221,9 +294,9 @@ function renderList() {
     button.setAttribute('aria-pressed', String(item.id === selectedId));
     button.title = `${objectNumber(item.id)} — ${item.designation}`;
 
-    const dot = document.createElement('span');
-    dot.className = 'piece-dot';
-    dot.textContent = objectNumber(item.id);
+    const identifier = document.createElement('span');
+    identifier.className = 'object-id';
+    identifier.textContent = item.id;
 
     const image = document.createElement('img');
     image.className = 'list-photo';
@@ -237,13 +310,9 @@ function renderList() {
     designation.className = 'object-name';
     designation.textContent = item.designation;
 
-    const location = document.createElement('span');
-    location.className = 'object-location';
-    location.textContent = placementLabel(placementFor(item.id));
+    details.append(designation);
 
-    details.append(designation, location);
-
-    button.append(dot, image, details);
+    button.append(identifier, image, details);
     button.addEventListener('click', () => selectObject(item.id));
     objectList.append(button);
   }
@@ -261,6 +330,10 @@ function selectObject(id) {
     selectedZones = [...placement.zones];
   }
 
+  researchPanel.hidden = true;
+  objectHeading.hidden = false;
+  selectionContent.hidden = false;
+  selectionPanel.setAttribute('aria-labelledby', 'selection-title');
   selectionContent.className = '';
   selectionContent.replaceChildren();
 
@@ -290,8 +363,26 @@ function selectObject(id) {
   pdfLink.textContent = 'Ouvrir la fiche PDF';
 
   selectionContent.append(title, image, designation, location, pdfLink);
+  objectActions.hidden = false;
   renderList();
   renderPlan();
+}
+
+function renderEmptySelection() {
+  objectActions.hidden = true;
+  objectHeading.hidden = true;
+  selectionContent.hidden = true;
+  selectionContent.replaceChildren();
+  researchPanel.hidden = false;
+  selectionPanel.setAttribute('aria-labelledby', 'research-title');
+}
+
+function deselectObject() {
+  if (!selectedId) return;
+  selectedId = null;
+  renderEmptySelection();
+  renderList();
+  updatePlaceButton();
 }
 
 function selectRectangle(start, end) {
@@ -366,7 +457,7 @@ function renderPlan() {
           const item = catalogue.find((candidate) => candidate.id === placement.objectId);
           if (!item) continue;
           const object = document.createElement('span');
-          object.className = 'zone-object';
+          object.className = `zone-object${item.id === selectedId ? ' is-selected' : ''}`;
           object.dataset.objectId = item.id;
           object.title = `${objectNumber(item.id)} — ${item.designation}`;
 
@@ -404,6 +495,11 @@ shelfButtons.forEach((button) => button.addEventListener('click', () => {
   selectedZones = [];
   renderPlan();
 }));
+
+planPanel.addEventListener('click', (event) => {
+  if (event.target.closest('.grid-scroll, button')) return;
+  deselectObject();
+});
 
 shelfGrid.addEventListener('pointerdown', (event) => {
   const placedObject = event.target.closest('.zone-object');
@@ -497,6 +593,7 @@ restoreInput.addEventListener('change', async () => {
     savePlacementState();
     selectedId = null;
     selectedZones = [];
+    renderEmptySelection();
     renderList();
     renderPlan();
   } catch {
@@ -512,6 +609,7 @@ function loadCatalogue() {
     countBadge.textContent = catalogue.length;
     catalogueCount.textContent = `${catalogue.length} objets du catalogue`;
     restorePlacementState();
+    renderResearchCriteria();
     renderList();
     renderPlan();
   } catch (error) {
@@ -522,6 +620,17 @@ function loadCatalogue() {
   }
 }
 
-searchInput.addEventListener('input', renderList);
+catalogueFilterButtons.forEach((button) => button.addEventListener('click', () => {
+  catalogueFilter = button.dataset.catalogueFilter;
+  renderList();
+}));
+researchInput.addEventListener('input', renderList);
+clearResearch.addEventListener('click', () => {
+  researchInput.value = '';
+  checkedCriteria.forEach((values) => values.clear());
+  researchCriteria.querySelectorAll('input').forEach((checkbox) => { checkbox.checked = false; });
+  updateResearchTitles();
+  renderList();
+});
 renderPlan();
 loadCatalogue();

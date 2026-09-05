@@ -7,7 +7,7 @@
     <link rel="manifest" href="manifest.webmanifest">
     <link rel="apple-touch-icon" href="icons/vitrines-192.png">
     <title>Plan de vitrine</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=5">
   </head>
   <body>
     <header class="topbar">
@@ -35,10 +35,11 @@
           <span class="count-badge" id="count-badge">—</span>
         </div>
 
-        <label class="search-box" for="object-search">
-          <span aria-hidden="true">⌕</span>
-          <input id="object-search" inputmode="numeric" autocomplete="off" placeholder="Numéro exact…" aria-label="Rechercher un objet par numéro exact">
-        </label>
+        <div class="catalogue-filters" aria-label="Filtrer les objets du catalogue">
+          <button type="button" data-catalogue-filter="all" aria-pressed="true">Tous</button>
+          <button type="button" data-catalogue-filter="placed" aria-pressed="false">Classés</button>
+          <button type="button" data-catalogue-filter="reserve" aria-pressed="false">En réserve</button>
+        </div>
         <p class="catalogue-message" id="catalogue-message" hidden></p>
         <div class="object-list" id="object-list" aria-label="Liste des objets"></div>
       </aside>
@@ -73,13 +74,18 @@
         </div>
       </section>
 
-      <aside class="selection-panel" aria-labelledby="selection-title">
-        <p class="eyebrow">Objet sélectionné</p>
-        <div id="selection-content" class="selection-empty">
-          <h2 id="selection-title">Choisissez un objet</h2>
-          <p>Sélectionnez un objet dans le Catalogue pour afficher sa photo et sa fiche PDF.</p>
-        </div>
-        <div class="object-actions">
+      <aside class="selection-panel" aria-labelledby="research-title">
+        <section id="research-panel">
+          <h2 id="research-title"><label for="research-input">Rechercher un objet</label></h2>
+          <input id="research-input" type="search" autocomplete="off" placeholder="Texte à rechercher…">
+          <p class="selection-note">Recherche dans les désignations et les particularités.</p>
+          <p id="research-count" aria-live="polite"></p>
+          <button id="clear-research" type="button">Effacer les critères</button>
+          <div id="research-criteria"></div>
+        </section>
+        <p class="eyebrow" id="object-heading" hidden>Objet sélectionné</p>
+        <div id="selection-content" hidden></div>
+        <div class="object-actions" hidden>
           <button type="button" class="place-button" id="place-button" disabled>+ Placer</button>
           <button type="button" class="move-button" id="move-button" disabled>↔ Déplacer</button>
           <button type="button" class="remove-button" id="remove-button" disabled>⌑ Retirer</button>
@@ -88,6 +94,7 @@
     </main>
 
     <script src="catalogue.js"></script>
-    <script src="app.js?v=5"></script>
+    <script src="recherche.js"></script>
+    <script src="app.js?v=10"></script>
   </body>
 </html>
