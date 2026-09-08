@@ -1,7 +1,7 @@
 'use strict';
 
 // Increment this version whenever a new application version is published.
-const CACHE_NAME = 'vitrines-pwa-v8';
+const CACHE_NAME = 'vitrines-pwa-v9';
 const APP_SHELL = [
   './',
   './index.html',
@@ -37,7 +37,10 @@ self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
   const url = new URL(event.request.url);
-  if (url.origin === self.location.origin && NETWORK_FIRST.has(url.pathname.split('/').pop())) {
+  if (url.origin === self.location.origin && (
+    NETWORK_FIRST.has(url.pathname.split('/').pop())
+    || url.pathname.includes('/pdf/')
+  )) {
     event.respondWith(
       fetch(event.request).then((response) => {
         if (response.ok) caches.open(CACHE_NAME).then((cache) => cache.put(event.request, response.clone()));
