@@ -1,6 +1,4 @@
-// Données dérivées de CATALOGUE/donnees.js, uniquement pour la recherche.
-// Les identifiants sont les clés ; les données archéologiques source restent inchangées.
-// decor : libellé prévu dans l’interface « Iconographie / type ».
+// Données dérivées de CATALOGUE/TECHNIQUE/donnees.js, uniquement pour la recherche.
 window.RECHERCHE = {
   "OBJ-0001": {
     "designation": "Chevalière armoriée Montferrand–Pellegrue",
@@ -560,13 +558,13 @@ window.RECHERCHE = {
       "Antiquité"
     ],
     "culture": [
-      "Romaine"
+      "Romaine (probable)"
     ],
     "matiere": [
-      "Alliage cuivreux"
+      "Bronze / alliage cuivreux"
     ],
     "technique": [
-      "Frappé"
+      "Frappé (probable)"
     ],
     "decor": [
       "Anthropomorphe",
@@ -614,7 +612,7 @@ window.RECHERCHE = {
       "Romaine"
     ],
     "matiere": [
-      "Alliage cuivreux"
+      "Alliage cuivreux / bronze"
     ],
     "technique": [
       "Frappé"
@@ -625,6 +623,237 @@ window.RECHERCHE = {
     ],
     "dateMin": 117,
     "dateMax": 138
+  },
+  "OBJ-0027": {
+    "designation": "Fibule romaine à charnière, type Aucissa probable",
+    "particularites": "Fibule en alliage cuivreux, à arc fortement cintré, presque semi-circulaire, et à charnière articulée. Le pied se prolonge par un porte-ardillon plein et développé. L'attribution à la famille Aucissa est probable ; aucun sous-type précis n'est retenu.",
+    "nature": [
+      "Fibules"
+    ],
+    "epoque": [
+      "Antiquité"
+    ],
+    "culture": [
+      "Romaine"
+    ],
+    "matiere": [
+      "Alliage cuivreux"
+    ],
+    "technique": [
+      "Charnière",
+      "Arc semi-circulaire"
+    ],
+    "decor": [],
+    "dateMin": -20,
+    "dateMax": 80
+  },
+  "OBJ-0028": {
+    "designation": "Fragment probable de fibule à lunettes",
+    "particularites": "Objet en alliage cuivreux constitué d'une tige enroulée en spirale plane de plusieurs tours. Il est compatible avec une grande spirale de fibule dite « à lunettes » ; l'attribution demeure probable car une seule spirale est conservée et le système d'attache n'est pas visible.",
+    "nature": [
+      "Fibules"
+    ],
+    "epoque": [
+      "Protohistoire"
+    ],
+    "culture": [
+      "Hallstattienne / italique (à préciser)"
+    ],
+    "matiere": [
+      "Alliage cuivreux",
+      "Bronze"
+    ],
+    "technique": [
+      "Tige enroulée en spirale"
+    ],
+    "decor": [],
+    "dateMin": -900,
+    "dateMax": -650
+  },
+  "OBJ-0029": {
+    "designation": "Fibule romaine à charnière, type Hod Hill probable",
+    "particularites": "Fibule à arc long, étroit et légèrement cintré, à tête roulée en tube formant la charnière. Trois moulures transversales marquent la partie haute de l'arc ; un décor longitudinal discret est visible sur le corps. L'attribution à la famille Hod Hill est probable. L'axe de charnière et l'ardillon sont manquants.",
+    "nature": [
+      "Fibules"
+    ],
+    "epoque": [
+      "Antiquité"
+    ],
+    "culture": [
+      "Romaine"
+    ],
+    "matiere": [
+      "Alliage cuivreux",
+      "Bronze"
+    ],
+    "technique": [
+      "Charnière tubulaire",
+      "Moulé"
+    ],
+    "decor": [
+      "Géométrique"
+    ],
+    "dateMin": 40,
+    "dateMax": 70
+  },
+  "OBJ-0030": {
+    "designation": "Follis byzantin de Constans II, atelier de Syracuse, probable",
+    "particularites": "Petit bronze byzantin très usé et corrodé. Revers : grand M, N, croix pattée avec point au-dessous et XX. Attribution à Constans II, atelier de Syracuse, vers 641-647, probable. Poids non mesuré.",
+    "nature": [
+      "Monnaies"
+    ],
+    "epoque": [
+      "Moyen Âge"
+    ],
+    "culture": [
+      "Byzantine"
+    ],
+    "matiere": [
+      "Alliage cuivreux"
+    ],
+    "technique": [
+      "Frappé"
+    ],
+    "decor": [
+      "Croix pattée",
+      "Grand M",
+      "Inscription / signes"
+    ],
+    "dateMin": 641,
+    "dateMax": 647
+  },
+  "OBJ-0031": {
+    "designation": "Denier de Charlemagne, atelier de Dorestad, probable",
+    "particularites": "Denier de Charlemagne, Dorestad, très probable. Flan mince ; authenticité plausible sur photos.",
+    "nature": [
+      "Monnaies"
+    ],
+    "epoque": [
+      "Moyen Âge"
+    ],
+    "culture": [
+      "Carolingienne"
+    ],
+    "matiere": [
+      "Argent"
+    ],
+    "technique": [
+      "Frappé"
+    ],
+    "decor": [
+      "Croix",
+      "Monogramme carolingien",
+      "Inscription / épigraphique"
+    ],
+    "dateMin": 781,
+    "dateMax": 812
+  },
+  "OBJ-0032": {
+    "designation": "Denier melgorien, comté de Melgueil",
+    "particularites": "Denier melgorien anonyme ; RAMVNDS / NAIDONA ; vers 1080-1120 ; poids non mesuré.",
+    "nature": [
+      "Monnaies"
+    ],
+    "epoque": [
+      "Moyen Âge"
+    ],
+    "culture": [
+      "Languedoc médiéval"
+    ],
+    "matiere": [
+      "Billon"
+    ],
+    "technique": [
+      "Frappé"
+    ],
+    "decor": [
+      "Croix",
+      "Annelets",
+      "Inscription / épigraphique"
+    ],
+    "dateMin": 1080,
+    "dateMax": 1120
+  },
+  "OBJ-0033": {
+    "designation": "Paire de garnitures creuses de mobilier, époque romaine probable",
+    "particularites": "Paire d'éléments creux très fragmentaires, à corps bombé, col court et extrémité discoïde. Présence probable de pattes ou ergots de fixation au bord des cassures. Extrémité centrale pleine, sans anneau. Interprétation comme garnitures de mobilier romaines probables. Pellicule brun-noir homogène ; altération thermique ancienne possible mais non démontrée.",
+    "nature": [
+      "Garnitures",
+      "Appliques de mobilier"
+    ],
+    "epoque": [
+      "Antiquité"
+    ],
+    "culture": [
+      "Romaine"
+    ],
+    "matiere": [
+      "Alliage cuivreux"
+    ],
+    "technique": [
+      "Moulé",
+      "Fixation par pattes / tige probable"
+    ],
+    "decor": [
+      "Forme globulaire",
+      "Surface lisse"
+    ],
+    "dateMin": 1,
+    "dateMax": 400
+  },
+  "OBJ-0034": {
+    "designation": "Bague à chaton gravé, époque romaine tardive probable",
+    "particularites": "Bague massive à anneau épais et épaules carénées, chaton plat gravé d'un motif végétal stylisé. Décor incisé sur les épaules. Attribution à l'époque romaine tardive probable, IIIe-IVe siècle, avec préférence typologique pour le IVe siècle. Usage sigillaire possible mais non démontré.",
+    "nature": [
+      "Bagues",
+      "Bijoux"
+    ],
+    "epoque": [
+      "Antiquité"
+    ],
+    "culture": [
+      "Romaine"
+    ],
+    "matiere": [
+      "Alliage cuivreux"
+    ],
+    "technique": [
+      "Moulé",
+      "Gravé / incisé"
+    ],
+    "decor": [
+      "Motif végétal stylisé",
+      "Palmette probable",
+      "Décor géométrique"
+    ],
+    "dateMin": 200,
+    "dateMax": 400
+  },
+  "OBJ-0035": {
+    "designation": "Bronze de Philippe II de Macédoine, Apollon / cavalier, probable",
+    "particularites": "Petit bronze très corrodé. Avers : portrait de profil compatible avec Apollon portant une taenia. Revers : jeune cavalier à cheval nettement lisible. Module de 16 mm compatible avec les bronzes de Philippe II. Légende et symbole de contrôle non lisibles ; attribution à Philippe II probable, atelier non déterminé.",
+    "nature": [
+      "Monnaies"
+    ],
+    "epoque": [
+      "Antiquité"
+    ],
+    "culture": [
+      "Macédonienne",
+      "Grecque"
+    ],
+    "matiere": [
+      "Alliage cuivreux"
+    ],
+    "technique": [
+      "Frappé"
+    ],
+    "decor": [
+      "Anthropomorphe",
+      "Équestre",
+      "Inscription / épigraphique"
+    ],
+    "dateMin": -359,
+    "dateMax": -294
   }
 };
-

@@ -605,7 +605,7 @@ restoreInput.addEventListener('change', async () => {
 
 function loadCatalogue() {
   try {
-    if (!Array.isArray(window.CATALOGUE) || window.CATALOGUE.length !== 26) throw new Error('Catalogue incomplet');
+    if (!Array.isArray(window.CATALOGUE) || window.CATALOGUE.length === 0) throw new Error('Catalogue incomplet');
 
     catalogue = [...window.CATALOGUE].sort((left, right) => objectNumber(left.id) - objectNumber(right.id));
     countBadge.textContent = catalogue.length;
