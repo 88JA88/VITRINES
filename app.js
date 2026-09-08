@@ -6,6 +6,7 @@ if ('serviceWorker' in navigator && window.isSecureContext) {
 
 const objectList = document.querySelector('#object-list');
 const catalogueFilterButtons = document.querySelectorAll('[data-catalogue-filter]');
+const sortToggle = document.querySelector('#sort-toggle');
 const countBadge = document.querySelector('#count-badge');
 const catalogueCount = document.querySelector('#catalogue-count');
 const storageStatus = document.querySelector('#storage-status');
@@ -40,6 +41,7 @@ const shelfButtons = document.querySelectorAll('[data-shelf]');
 
 let catalogue = [];
 let catalogueFilter = 'all';
+let sortDescending = false;
 let selectedId = null;
 let cabinet = 'V1';
 let shelf = 'E4';
@@ -271,7 +273,10 @@ function visibleObjects() {
 }
 
 function renderList() {
-  const visible = visibleObjects();
+  const visible = visibleObjects().sort((left, right) => {
+    const difference = objectNumber(left.id) - objectNumber(right.id);
+    return sortDescending ? -difference : difference;
+  });
   catalogueFilterButtons.forEach((button) => {
     const isActive = button.dataset.catalogueFilter === catalogueFilter;
     button.classList.toggle('active', isActive);
@@ -626,6 +631,11 @@ catalogueFilterButtons.forEach((button) => button.addEventListener('click', () =
   catalogueFilter = button.dataset.catalogueFilter;
   renderList();
 }));
+sortToggle.addEventListener('click', () => {
+  sortDescending = !sortDescending;
+  sortToggle.setAttribute('aria-pressed', String(sortDescending));
+  renderList();
+});
 researchInput.addEventListener('input', renderList);
 clearResearch.addEventListener('click', () => {
   researchInput.value = '';

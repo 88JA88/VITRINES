@@ -71,7 +71,7 @@ window.RECHERCHE = {
     "dateMax": 250
   },
   "OBJ-0004": {
-    "designation": "Fibule probable à décor d’ocelles",
+    "designation": "Plaque de boucle / garniture de ceinture à décor d'ocelles",
     "particularites": "Plaque semi-circulaire portant plusieurs motifs de cercles concentriques ou ocelles. Le revers et le profil montrent une patte verticale perforée et, à l’autre extrémité, un petit ergot ou rebord relevé. L’ardillon n’est pas conservé. L’objet est probablement une fibule ou une broche destinée à fermer ou maintenir un vêtement. Cette fonction reste toutefois moins assurée que pour les exemplaires dont le système d’attache est complet.",
     "nature": [
       "Fibules"
@@ -266,7 +266,7 @@ window.RECHERCHE = {
     "dateMax": 900
   },
   "OBJ-0012": {
-    "designation": "Fibule zoomorphe en forme de tortue",
+    "designation": "Fibule-plaque romaine à extrémités symétriques",
     "particularites": "Petite fibule évoquant une tortue stylisée : une extrémité forme une tête avec museau, tandis que le corps central massif, encadré de fortes moulures transversales, rappelle une carapace. Le revers est épais et arqué avec des vestiges du système de fixation. La fibule se portait sur le vêtement comme système de fermeture ou de maintien. La forme animale donnait à l’objet une fonction décorative immédiatement visible.",
     "nature": [
       "Fibules"
@@ -360,7 +360,7 @@ window.RECHERCHE = {
     "dateMax": 150
   },
   "OBJ-0016": {
-    "designation": "Paire d’extrémités de courroie zoomorphes",
+    "designation": "Paire de garnitures de courroie à têtes canines",
     "particularites": "Deux pièces presque identiques, longues d’environ 4 à 4,2 cm. Chaque élément possède un corps allongé légèrement courbe et une extrémité élargie portant une figure animale. Des lignes incisées soulignent la tête et le corps de l’animal. Ces pièces étaient probablement fixées à l’extrémité d’une courroie ou d’une ceinture. Elles protégeaient et rigidifiaient la terminaison de la lanière tout en la décorant.",
     "nature": [
       "Parures vestimentaires"
@@ -430,7 +430,7 @@ window.RECHERCHE = {
     "dateMax": 600
   },
   "OBJ-0019": {
-    "designation": "Fibule aviforme à long cou",
+    "designation": "Fibule aviforme, oiseau terrestre, perdrix probable",
     "particularites": "Petite fibule représentant un oiseau très allongé, au long cou relevé, au corps fuselé et à la queue pointue. Un petit éclat métallique doré subsiste sur la surface ; la dorure ancienne a presque entièrement disparu. Le revers montre les vestiges du système d’attache. Cette fibule servait à fermer ou maintenir le vêtement. Sa forme d’oiseau et sa probable dorure lui donnaient également une fonction de parure particulièrement visible.",
     "nature": [
       "Fibules"
@@ -454,8 +454,8 @@ window.RECHERCHE = {
     "dateMax": 600
   },
   "OBJ-0020": {
-    "designation": "Fibule zoomorphe figurant probablement un castor",
-    "particularites": "Petite fibule au corps allongé et bombé, avec une extrémité élargie et l’autre plus étroite. La silhouette évoque un petit mammifère aquatique ; la lecture en castor est plausible en raison du corps massif et de l’impression d’une queue large et aplatie. Si l’identification comme fibule est correcte, l’objet se portait sur un vêtement comme système de fixation et élément de parure. L’animal représenté reste toutefois incertain.",
+    "designation": "Fibule zoomorphe, tête de canard très probable",
+    "particularites": "Petite fibule au corps allongé et bombé, avec une extrémité élargie formant une tête zoomorphe. La morphologie évoque très probablement une tête de canard, notamment par la forme du bec et le profil général. Le revers conserve les éléments du système d’attache. Cette fibule se portait sur un vêtement comme système de fixation et élément de parure. L’identification précise de l’animal reste toutefois prudente.",
     "nature": [
       "Fibules"
     ],
@@ -549,7 +549,7 @@ window.RECHERCHE = {
     "dateMax": 157
   },
   "OBJ-0024": {
-    "designation": "Bronze républicain à Janus et proue (attribution probable)",
+    "designation": "As républicain romain à Janus et proue (probable)",
     "particularites": "Petit bronze au flan irrégulier. Une face montre une tête janiforme, compatible avec Janus ; l’autre présente un motif très usé interprétable comme une proue de navire. Cette combinaison correspond au type classique des bronzes de la République romaine. Toutefois, le diamètre de 19 mm est nettement inférieur à celui de nombreux asses républicains conservés ; la dénomination exacte et la série ne sont donc pas retenues avec certitude sans mesure du poids et lecture plus sûre des marques de valeur ou légendes.\n\nUSAGE -\nMonnaie de bronze destinée aux échanges quotidiens. Le type Janus / proue est caractéristique du monnayage républicain romain : Janus occupe l’avers, tandis que la proue de navire forme un motif récurrent au revers des bronzes républicains.",
     "nature": [
       "Monnaies"
@@ -558,19 +558,19 @@ window.RECHERCHE = {
       "Antiquité"
     ],
     "culture": [
-      "Romaine (probable)"
+      "Romaine"
     ],
     "matiere": [
       "Bronze / alliage cuivreux"
     ],
     "technique": [
-      "Frappé (probable)"
+      "Frappé"
     ],
     "decor": [
       "Anthropomorphe",
       "Naval"
     ],
-    "dateMin": -225,
+    "dateMin": -211,
     "dateMax": -80
   },
   "OBJ-0025": {
@@ -601,7 +601,7 @@ window.RECHERCHE = {
   },
   "OBJ-0026": {
     "designation": "Bronze d’Hadrien au cerf, Éphèse",
-    "particularites": "Bronze provincial romain très usé. L’avers montre un portrait impérial lauré tourné à droite, compatible avec Hadrien. Au revers, le relief central évoque un cerf, motif attesté sur les bronzes d’Éphèse sous Hadrien. Le diamètre de 22 mm reste compatible avec les émissions éphésiennes de ce règne. Les légendes sont trop effacées pour être lues avec sûreté ; l’attribution à Éphèse et au type au cerf est donc retenue comme probable.\n\nUSAGE -\nMonnaie de circulation provinciale de l’Empire romain. Elle associait la valeur d’échange à l’image du pouvoir impérial et à une iconographie locale : à Éphèse, le cerf renvoie au monde religieux d’Artémis, divinité majeure de la cité.",
+    "particularites": "Bronze provincial romain très usé. L’avers montre un portrait impérial lauré tourné à droite, compatible avec Hadrien. Au revers, le relief central évoque un cerf, motif attesté sur les bronzes d’Éphèse sous Hadrien. Le rapprochement le plus vraisemblable se fait avec les types RPC III 2069 et 2070, sans qu’il soit possible de déterminer avec certitude la variante en raison de l’usure. Monnaie de circulation provinciale de l’Empire romain ; à Éphèse, le cerf renvoie au monde religieux d’Artémis, divinité majeure de la cité.",
     "nature": [
       "Monnaies"
     ],
@@ -648,8 +648,8 @@ window.RECHERCHE = {
     "dateMax": 80
   },
   "OBJ-0028": {
-    "designation": "Fragment probable de fibule à lunettes",
-    "particularites": "Objet en alliage cuivreux constitué d'une tige enroulée en spirale plane de plusieurs tours. Il est compatible avec une grande spirale de fibule dite « à lunettes » ; l'attribution demeure probable car une seule spirale est conservée et le système d'attache n'est pas visible.",
+    "designation": "Fragment probable de fibule à lunettes en bronze",
+    "particularites": "Élément spiralé en alliage cuivreux formé d’une tige d’environ 2 mm enroulée en spirale plane de 28 mm. La morphologie est très compatible avec l’une des deux spirales d’une fibule à lunettes. L’identification reste probable car la seconde spirale et le système d’attache ne sont pas conservés. Une fonction de parure est plus vraisemblable que l’hypothèse d’une simple réserve de matière ou d’un semi-produit. Datation de travail : premier âge du Fer, -900 à -650.",
     "nature": [
       "Fibules"
     ],
@@ -657,16 +657,19 @@ window.RECHERCHE = {
       "Protohistoire"
     ],
     "culture": [
-      "Hallstattienne / italique (à préciser)"
+      "Protohistoire européenne"
     ],
     "matiere": [
       "Alliage cuivreux",
       "Bronze"
     ],
     "technique": [
-      "Tige enroulée en spirale"
+      "tige enroulée ; mise en forme probable par martelage et pliage"
     ],
-    "decor": [],
+    "decor": [
+      "Géométrique",
+      "Spiralé"
+    ],
     "dateMin": -900,
     "dateMax": -650
   },
