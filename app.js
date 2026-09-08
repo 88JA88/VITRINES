@@ -1,7 +1,7 @@
 'use strict';
 
 if ('serviceWorker' in navigator && window.isSecureContext) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js'));
+  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js?v=9'));
 }
 
 const objectList = document.querySelector('#object-list');
