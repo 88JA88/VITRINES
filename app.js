@@ -296,6 +296,7 @@ function renderList() {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = `object-row${item.id === selectedId ? ' is-selected' : ''}`;
+    button.dataset.objectId = item.id;
     button.setAttribute('aria-pressed', String(item.id === selectedId));
     button.title = `${objectNumber(item.id)} — ${item.designation}`;
 
@@ -323,7 +324,7 @@ function renderList() {
   }
 }
 
-function selectObject(id) {
+function selectObject(id, { scrollCatalogue = false } = {}) {
   selectedId = id;
   const item = catalogue.find((candidate) => candidate.id === id);
   if (!item) return;
@@ -370,6 +371,7 @@ function selectObject(id) {
   selectionContent.append(title, image, designation, location, pdfLink);
   objectActions.hidden = false;
   renderList();
+  if (scrollCatalogue) objectList.querySelector(`[data-object-id="${id}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   renderPlan();
 }
 
@@ -513,7 +515,7 @@ shelfGrid.addEventListener('pointerdown', (event) => {
   if (placedObject) {
     event.preventDefault();
     event.stopPropagation();
-    selectObject(placedObject.dataset.objectId);
+    selectObject(placedObject.dataset.objectId, { scrollCatalogue: true });
     return;
   }
 

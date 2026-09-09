@@ -880,5 +880,88 @@ window.RECHERCHE = {
     "decor": [],
     "dateMin": 1,
     "dateMax": 400
+  },
+  "OBJ-0037": {
+    "designation": "Fibule discoïde ajourée à décor rayonnant, romaine",
+    "particularites": "Grande fibule discoïde en alliage cuivreux, moulée et largement ajourée. Le décor s’organise autour d’un moyeu central d’où partent huit branches courbes rayonnantes. Le bord extérieur est rythmé par une série régulière de petites saillies. Le revers conserve les éléments du système d’attache, avec support de l’ardillon et porte-ardillon opposé. La composition appartient au groupe des fibules-disques romaines ajourées à décor de roue ou de rosette rayonnante.",
+    "nature": [
+      "Fibules"
+    ],
+    "epoque": [
+      "Antiquité"
+    ],
+    "culture": [
+      "Romaine"
+    ],
+    "matiere": [
+      "Alliage cuivreux"
+    ],
+    "technique": [
+      "Moulé",
+      "Ajouré"
+    ],
+    "decor": [
+      "Géométrique",
+      "Rayonnant",
+      "Roue"
+    ],
+    "dateMin": 50,
+    "dateMax": 200
+  },
+  "OBJ-0038": {
+    "designation": "Applique circulaire émaillée à décor concentrique, romaine",
+    "particularites": "Applique discoïde en alliage cuivreux à décor concentrique émaillé. La face est organisée en plusieurs registres circulaires séparés par des nervures métalliques ; des vestiges d’émail rouge-orangé et sombre subsistent dans les cellules. Le revers est plat et porte au centre un tenon de fixation. Le système d’attache rattache l’objet aux appliques ou clous décoratifs romains destinés à être fixés sur un support. Le décor polychrome en champlevé et l’organisation concentrique s’inscrivent dans le répertoire des garnitures romaines des IIe et début du IIIe siècles apr. J.-C.",
+    "nature": [
+      "Appliques / garnitures"
+    ],
+    "epoque": [
+      "Antiquité"
+    ],
+    "culture": [
+      "Romaine"
+    ],
+    "matiere": [
+      "Alliage cuivreux",
+      "Émail"
+    ],
+    "technique": [
+      "Moulé",
+      "Émail champlevé"
+    ],
+    "decor": [
+      "Géométrique",
+      "Concentrique",
+      "Polychrome"
+    ],
+    "dateMin": 100,
+    "dateMax": 250
+  },
+  "OBJ-0039": {
+    "designation": "Fibule discoïde ajourée à motif de tourbillon à six branches, romaine",
+    "particularites": "Fibule discoïde en alliage cuivreux, moulée et largement ajourée. Le décor est organisé autour d’un centre plein d’où partent six branches courbes disposées en mouvement tournant. Leurs extrémités élargies relèvent du vocabulaire des motifs de trompette. Le revers conserve les vestiges de l’articulation de l’ardillon et du porte-ardillon opposé ; l’ardillon est perdu. La forme appartient au groupe des fibules-plaques ajourées du IIe siècle apr. J.-C. Le décor curviligne à tourbillon et les terminaisons en forme de trompette s’inscrivent dans le répertoire ornemental romano-celtique des provinces occidentales de l’Empire romain.",
+    "nature": [
+      "Fibules"
+    ],
+    "epoque": [
+      "Antiquité"
+    ],
+    "culture": [
+      "Romaine"
+    ],
+    "matiere": [
+      "Alliage cuivreux"
+    ],
+    "technique": [
+      "Moulé",
+      "Ajouré"
+    ],
+    "decor": [
+      "Géométrique",
+      "Curviligne",
+      "Tourbillon à six branches",
+      "Romano-celtique"
+    ],
+    "dateMin": 100,
+    "dateMax": 200
   }
 };
