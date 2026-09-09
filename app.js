@@ -585,6 +585,16 @@ function downloadState(state, prefix = 'VITRINE') {
   URL.revokeObjectURL(url);
 }
 
+function readFileAsText(file) {
+  if (typeof file.text === 'function') return file.text();
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result));
+    reader.onerror = () => reject(reader.error || new Error('Lecture du fichier impossible'));
+    reader.readAsText(file);
+  });
+}
+
 backupButton.addEventListener('click', () => downloadState(stateForExport()));
 restoreButton.addEventListener('click', () => restoreInput.click());
 restoreInput.addEventListener('change', async () => {
@@ -592,7 +602,7 @@ restoreInput.addEventListener('change', async () => {
   restoreInput.value = '';
   if (!file) return;
   try {
-    const restored = parseState(JSON.parse(await file.text()));
+    const restored = parseState(JSON.parse(await readFileAsText(file)));
     if (!window.confirm('Remplacer les placements actuels ? Une sauvegarde de sécurité sera téléchargée avant la restauration.')) return;
     downloadState(stateForExport(), 'VITRINE-AVANT-RESTAURATION');
     placements = restored.placements;
