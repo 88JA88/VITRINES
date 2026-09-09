@@ -28,6 +28,7 @@ const researchFamilies = [
 ];
 const checkedCriteria = new Map(researchFamilies.map(([field]) => [field, new Set()]));
 const planPanel = document.querySelector('.plan-panel');
+const planHeading = document.querySelector('.plan-heading');
 const shelfGrid = document.querySelector('#shelf-grid');
 const planTitle = document.querySelector('#plan-title');
 const selectionSummary = document.querySelector('#selection-summary');
@@ -49,6 +50,7 @@ let selectedZones = [];
 let dragStart = null;
 let placements = [];
 let reservedIds = new Set();
+let headingScroll = null;
 
 const rows = ['A', 'B', 'C', 'D', 'E'];
 const columns = [1, 2, 3, 4, 5];
@@ -540,6 +542,21 @@ function finishSelection(event) {
 
 shelfGrid.addEventListener('pointerup', finishSelection);
 shelfGrid.addEventListener('pointercancel', finishSelection);
+
+planHeading.addEventListener('pointerdown', (event) => {
+  if (event.target.closest('button, a, input, select, textarea, label, [role="button"]')) return;
+  headingScroll = { pointerId: event.pointerId, startX: event.clientX, startLeft: document.querySelector('.grid-scroll').scrollLeft };
+  planHeading.setPointerCapture?.(event.pointerId);
+});
+
+planHeading.addEventListener('pointermove', (event) => {
+  if (!headingScroll || headingScroll.pointerId !== event.pointerId) return;
+  const gridScroll = document.querySelector('.grid-scroll');
+  gridScroll.scrollLeft = headingScroll.startLeft - (event.clientX - headingScroll.startX);
+});
+
+planHeading.addEventListener('pointerup', () => { headingScroll = null; });
+planHeading.addEventListener('pointercancel', () => { headingScroll = null; });
 
 placeButton.addEventListener('click', () => {
   if (!selectedId || selectedZones.length === 0 || hasActivePlacement(selectedId)) return;

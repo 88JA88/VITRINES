@@ -54,7 +54,7 @@ h2 { font-size: 24px; }
 .segmented, .shelf-tabs { display: flex; gap: 4px; padding: 4px; border-radius: 11px; background: #e9e5db; }
 .segmented button, .shelf-tabs button { padding: 8px 13px; border: 0; border-radius: 8px; background: transparent; color: #68716c; font-size: 12px; font-weight: 700; cursor: pointer; }
 .segmented button.active, .shelf-tabs button.active { background: var(--paper); color: #184a42; box-shadow: 0 1px 5px #24312d18; }
-.plan-heading { display: flex; align-items: flex-start; justify-content: flex-start; gap: 8px; margin-bottom: 12px; }
+.plan-heading { display: flex; align-items: flex-start; justify-content: flex-start; gap: 8px; margin-bottom: 12px; touch-action: none; cursor: grab; }
 .plan-heading h2 { font-size: 28px; }
 .present-strip { min-width: 0; flex: 1; display: flex; align-items: center; gap: 5px; overflow-x: auto; padding: 2px; -webkit-overflow-scrolling: touch; }
 .present-group { display: flex; flex: 0 0 auto; flex-direction: column; gap: 3px; }
