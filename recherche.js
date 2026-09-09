@@ -675,7 +675,7 @@ window.RECHERCHE = {
   },
   "OBJ-0029": {
     "designation": "Fibule romaine à charnière, type Hod Hill probable",
-    "particularites": "Fibule à arc long, étroit et légèrement cintré, à tête roulée en tube formant la charnière. Trois moulures transversales marquent la partie haute de l'arc ; un décor longitudinal discret est visible sur le corps. L'attribution à la famille Hod Hill est probable. L'axe de charnière et l'ardillon sont manquants.",
+    "particularites": "Fibule romaine en alliage cuivreux, longue et étroite, à arc légèrement cintré. La tête est roulée en tube et forme une charnière ; trois moulures transversales marquent la partie haute de l’arc. Le pied et une partie du porte-ardillon sont conservés, tandis que l’axe et l’ardillon manquent. L’ensemble correspond probablement à la famille des fibules Hod Hill, caractéristique du milieu du Ier siècle apr. J.-C. Aucun sous-type plus précis n’est retenu.",
     "nature": [
       "Fibules"
     ],
@@ -700,8 +700,8 @@ window.RECHERCHE = {
     "dateMax": 70
   },
   "OBJ-0030": {
-    "designation": "Follis byzantin de Constans II, atelier de Syracuse, probable",
-    "particularites": "Petit bronze byzantin très usé et corrodé. Revers : grand M, N, croix pattée avec point au-dessous et XX. Attribution à Constans II, atelier de Syracuse, vers 641-647, probable. Poids non mesuré.",
+    "designation": "Follis byzantin de Théophile, Syracuse, probable",
+    "particularites": "Petit bronze byzantin très usé et corrodé, frappé sur un flan irrégulier et épais. Le revers présente un grand M entouré de signes très altérés, dont l’organisation est compatible avec les colonnes XXX et NNN et une croix au-dessus. L’avers est fortement usé et ne permet pas de lire sûrement le portrait ni la légende. La disposition du revers correspond mieux aux folles de Théophile frappés à Syracuse qu’aux émissions de Constans II précédemment envisagées. L’attribution retenue est donc Théophile, atelier de Syracuse, probable, règne 829-842.",
     "nature": [
       "Monnaies"
     ],
@@ -718,12 +718,12 @@ window.RECHERCHE = {
       "Frappé"
     ],
     "decor": [
-      "Croix pattée",
       "Grand M",
-      "Inscription / signes"
+      "Croix",
+      "XXX / NNN"
     ],
-    "dateMin": 641,
-    "dateMax": 647
+    "dateMin": 829,
+    "dateMax": 842
   },
   "OBJ-0031": {
     "designation": "Denier de Charlemagne, atelier de Dorestad, probable",
@@ -779,7 +779,7 @@ window.RECHERCHE = {
   },
   "OBJ-0033": {
     "designation": "Paire de garnitures creuses de mobilier, époque romaine probable",
-    "particularites": "Paire d'éléments creux très fragmentaires, à corps bombé, col court et extrémité discoïde. Présence probable de pattes ou ergots de fixation au bord des cassures. Extrémité centrale pleine, sans anneau. Interprétation comme garnitures de mobilier romaines probables. Pellicule brun-noir homogène ; altération thermique ancienne possible mais non démontrée.",
+    "particularites": "Paire de petits éléments creux en alliage cuivreux, à corps bombé ou globulaire, col court et extrémité discoïde. Les larges ouvertures visibles correspondent à des cassures. Des saillies internes régulières peuvent correspondre à des pattes ou éléments de fixation. L’absence d’anneau ou de perforation fonctionnelle rend peu probable un usage comme pendentif. L’interprétation la plus cohérente est celle de garnitures ou appliques fixées sur un meuble, un coffret ou un autre support. Des parallèles existent parmi les garnitures romaines dites « bell-shaped studs », mais aucun sous-type précis n’est retenu.",
     "nature": [
       "Garnitures",
       "Appliques de mobilier"
@@ -858,5 +858,27 @@ window.RECHERCHE = {
     ],
     "dateMin": -359,
     "dateMax": -294
+  },
+  "OBJ-0036": {
+    "designation": "Petit cuilleron de toilette ou cosmétique en alliage cuivreux, romain probable",
+    "particularites": "Petit instrument en alliage cuivreux comportant un cuilleron ovale, peu profond, de 20 x 15 mm. Le manche est cassé ; un épaulement net à la jonction indique qu’il se prolongeait par une tige plus fine. Le faible module du cuilleron et la morphologie du départ de manche correspondent à un petit instrument de toilette ou de cosmétique plutôt qu’à une cuillère alimentaire. Il pouvait servir à prélever ou appliquer des baumes, onguents ou préparations cosmétiques.",
+    "nature": [
+      "Objets de toilette"
+    ],
+    "epoque": [
+      "Antiquité"
+    ],
+    "culture": [
+      "Romaine"
+    ],
+    "matiere": [
+      "Alliage cuivreux"
+    ],
+    "technique": [
+      "Façonné"
+    ],
+    "decor": [],
+    "dateMin": 1,
+    "dateMax": 400
   }
 };
