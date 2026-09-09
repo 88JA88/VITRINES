@@ -963,5 +963,53 @@ window.RECHERCHE = {
     ],
     "dateMin": 100,
     "dateMax": 200
+  },
+  "OBJ-0040": {
+    "designation": "Terret de harnais à fixation intégrée, époque romaine probable",
+    "particularites": "Anneau de harnais à grand passage circulaire, prolongé à la base par une fixation intégrée formant une ouverture longitudinale et un terminal évasé. Cette construction appartient au répertoire des terrets montés sur courroie de l’époque romaine, utilisés comme guides de rênes. L’objet appartient à la même famille fonctionnelle que OBJ-0041, mais présente un dispositif de fixation intégré plus développé.",
+    "nature": [
+      "Harnachement"
+    ],
+    "epoque": [
+      "Antiquité"
+    ],
+    "culture": [
+      "Romaine"
+    ],
+    "matiere": [
+      "Alliage cuivreux"
+    ],
+    "technique": [
+      "Moulé"
+    ],
+    "decor": [
+      "Géométrique"
+    ],
+    "dateMin": 1,
+    "dateMax": 200
+  },
+  "OBJ-0041": {
+    "designation": "Terret simple de harnais en alliage cuivreux",
+    "particularites": "Terret simple à grand anneau ovale et barre basale rectangulaire intégrée, avec moulures transversales sur la partie inférieure. Cette forme est caractéristique des terrets simples de la fin de l’âge du Fer et du début de l’époque romaine. L’objet servait de guide de rênes sur le harnachement d’un véhicule attelé. Il appartient à la même famille fonctionnelle que OBJ-0040.",
+    "nature": [
+      "Harnachement"
+    ],
+    "epoque": [
+      "Protohistoire",
+      "Antiquité"
+    ],
+    "culture": [],
+    "matiere": [
+      "Alliage cuivreux"
+    ],
+    "technique": [
+      "Moulé"
+    ],
+    "decor": [
+      "Géométrique",
+      "Moulures transversales"
+    ],
+    "dateMin": -100,
+    "dateMax": 100
   }
 };
