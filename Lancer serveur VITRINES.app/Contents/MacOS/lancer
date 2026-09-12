@@ -1,0 +1,60 @@
+#!/bin/zsh
+set -e
+DOSSIER_VITRINES="$(cd "$(dirname "$0")/../../.." && pwd)"
+cd "$DOSSIER_VITRINES"
+
+PORT=5001
+NOM_MAC="$(scutil --get LocalHostName 2>/dev/null || hostname -s)"
+ADRESSE="http://${NOM_MAC}.local:${PORT}"
+
+PYTHON_VITRINES=""
+for CANDIDAT in \
+  /Library/Frameworks/Python.framework/Versions/Current/bin/python3 \
+  /opt/homebrew/bin/python3 \
+  /usr/local/bin/python3 \
+  "$(command -v python3 2>/dev/null)"; do
+  if [ -n "$CANDIDAT" ] && [ -x "$CANDIDAT" ] && "$CANDIDAT" -c 'import flask' >/dev/null 2>&1; then
+    PYTHON_VITRINES="$CANDIDAT"
+    break
+  fi
+done
+
+if [ -z "$PYTHON_VITRINES" ]; then
+  osascript -e 'display dialog "Flask est introuvable dans les installations Python du Mac." buttons {"OK"} with icon stop'
+  exit 1
+fi
+
+JOURNAL_GENERATION="/tmp/vitrines-generation.log"
+if ! "$PYTHON_VITRINES" "$DOSSIER_VITRINES/../CATALOGUE/synchroniser_catalogue.py" >"$JOURNAL_GENERATION" 2>&1; then
+  osascript -e 'display dialog "La génération du catalogue a échoué. VITRINES n’a pas été ouvert. Consultez /tmp/vitrines-generation.log." buttons {"OK"} with icon stop'
+  exit 1
+fi
+
+if lsof -nP -iTCP:"$PORT" -sTCP:LISTEN >/dev/null 2>&1; then
+  /usr/bin/open "$ADRESSE"
+  osascript -e "display dialog \"Le serveur VITRINES est déjà lancé.\\n\\nAdresse : ${ADRESSE}\" buttons {\"OK\"} default button \"OK\" with title \"VITRINES\""
+  exit 0
+fi
+
+"$PYTHON_VITRINES" "$DOSSIER_VITRINES/serveur_vitrines.py" >/tmp/serveur-vitrines.log 2>&1 &
+PID_SERVEUR=$!
+
+nettoyer() {
+  kill "$PID_SERVEUR" 2>/dev/null || true
+}
+trap nettoyer EXIT INT TERM
+
+sleep 1
+if ! kill -0 "$PID_SERVEUR" 2>/dev/null; then
+  osascript -e 'display dialog "Le serveur VITRINES n’a pas pu démarrer. Consultez /tmp/serveur-vitrines.log." buttons {"OK"} with icon stop'
+  exit 1
+fi
+
+if [ "${VITRINES_MODE_SILENCIEUX:-}" = "1" ]; then
+  wait "$PID_SERVEUR"
+  exit 0
+fi
+
+/usr/bin/open "$ADRESSE"
+
+osascript -e "display dialog \"\" buttons {\"Arrêter le serveur\"} default button \"Arrêter le serveur\" with title \"\""

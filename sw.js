@@ -1,14 +1,14 @@
 'use strict';
 
 // Increment this version whenever a new application version is published.
-const CACHE_NAME = 'vitrines-pwa-v9';
+const CACHE_NAME = 'vitrines-pwa-v16';
 const APP_SHELL = [
   './',
   './index.html',
-  './styles.css?v=5',
-  './app.js?v=12',
+  './styles.css?v=7',
+  './app.js?v=21',
   './recherche.js?v=9',
-  './catalogue.js?v=9',
+  './catalogue.js?v=11',
   './manifest.webmanifest',
   './icons/vitrines-192.png',
   './icons/vitrines-512.png',
@@ -37,12 +37,16 @@ self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
   const url = new URL(event.request.url);
+  if (url.origin === self.location.origin && url.pathname.startsWith('/api/placements')) {
+    event.respondWith(fetch(event.request, { cache: 'no-store' }));
+    return;
+  }
   if (url.origin === self.location.origin && (
     NETWORK_FIRST.has(url.pathname.split('/').pop())
     || url.pathname.includes('/pdf/')
   )) {
     event.respondWith(
-      fetch(event.request).then((response) => {
+      fetch(event.request, { cache: 'no-store' }).then((response) => {
         if (response.ok) caches.open(CACHE_NAME).then((cache) => cache.put(event.request, response.clone()));
         return response;
       }).catch(() => caches.match(event.request)),

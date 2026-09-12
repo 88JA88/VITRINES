@@ -7,7 +7,7 @@
     <link rel="manifest" href="manifest.webmanifest">
     <link rel="apple-touch-icon" href="icons/vitrines-192.png">
     <title>Plan de vitrine</title>
-    <link rel="stylesheet" href="styles.css?v=5">
+    <link rel="stylesheet" href="styles.css?v=7">
   </head>
   <body>
     <header class="topbar">
@@ -17,9 +17,9 @@
         <h1>Plan de vitrine</h1>
       </div>
       <div class="top-actions">
-        <p class="storage-status" id="storage-status" aria-live="polite"></p>
-        <button type="button" class="backup-button" id="backup-button">Sauvegarder</button>
-        <button type="button" class="restore-button" id="restore-button">Restaurer</button>
+        <p class="storage-status" id="storage-status" aria-live="polite">Placements enregistrés automatiquement sur le Mac</p>
+        <button type="button" class="backup-button" id="backup-button" title="Créer une copie JSON de secours">Exporter JSON (secours)</button>
+        <button type="button" class="restore-button" id="restore-button" title="Restaurer une copie JSON de secours">Restaurer JSON (secours)</button>
         <p class="catalogue-count" id="catalogue-count" aria-live="polite">Chargement du Catalogue…</p>
       </div>
       <input id="restore-input" type="file" accept="application/json,.json" hidden>
@@ -94,8 +94,8 @@
       </aside>
     </main>
 
-    <script src="catalogue.js?v=9"></script>
+    <script src="catalogue.js?v=11"></script>
     <script src="recherche.js?v=9"></script>
-    <script src="app.js?v=12"></script>
+    <script src="app.js?v=21"></script>
   </body>
 </html>
