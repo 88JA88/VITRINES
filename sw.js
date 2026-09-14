@@ -1,12 +1,12 @@
 'use strict';
 
 // Increment this version whenever a new application version is published.
-const CACHE_NAME = 'vitrines-pwa-v16';
+const CACHE_NAME = 'vitrines-pwa-v17';
 const APP_SHELL = [
   './',
   './index.html',
   './styles.css?v=7',
-  './app.js?v=21',
+  './app.js?v=22',
   './recherche.js?v=9',
   './catalogue.js?v=11',
   './manifest.webmanifest',
@@ -19,6 +19,7 @@ const NETWORK_FIRST = new Set([
   'styles.css',
   'catalogue.js',
   'recherche.js',
+  'placements.json',
 ]);
 
 self.addEventListener('install', (event) => {

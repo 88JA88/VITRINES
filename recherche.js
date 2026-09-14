@@ -1330,24 +1330,26 @@ window.RECHERCHE = {
     "dateMax": 100
   },
   "OBJ-0052": {
-    "designation": "Petite pince romaine probable en alliage cuivreux à ressort annulaire",
-    "particularites": "Petite pince en alliage cuivreux constituée de deux branches parallèles réunies à une extrémité par une large boucle circulaire formant ressort. La pression exercée sur les branches permettait de rapprocher leurs extrémités. L'objet est de petites dimensions, 49 x 21 mm, et ne présente pas de décor visible.",
+    "designation": "Crampon à double fiche et tête annulaire, type ARTEFACTS CRP-4016",
+    "particularites": "Petit crampon en alliage cuivreux formé à partir d’une seule tige repliée et enroulée de manière à constituer une large tête annulaire. Les deux extrémités parallèles forment les fiches destinées à être enfoncées dans un support. L’objet mesure 49 x 21 mm et ne présente pas de décor visible.",
     "nature": [
-      "Outils"
+      "Objets domestiques"
     ],
     "epoque": [
+      "Protohistoire",
       "Antiquité"
     ],
-    "culture": [
-      "Romaine"
-    ],
+    "culture": [],
     "matiere": [
       "Alliage cuivreux"
     ],
-    "technique": [],
+    "technique": [
+      "Plié",
+      "Enroulé"
+    ],
     "decor": [],
-    "dateMin": 1,
-    "dateMax": 400
+    "dateMin": -50,
+    "dateMax": 300
   },
   "OBJ-0053": {
     "designation": "Rouelle à quatre rayons et moyeu plein, celtique probable",
@@ -1373,5 +1375,50 @@ window.RECHERCHE = {
     ],
     "dateMin": -200,
     "dateMax": -30
+  },
+  "OBJ-0054": {
+    "designation": "Rouelle à quatre rayons et globule central, type ARTEFACTS RUL-4014 / B3a",
+    "particularites": "Petite rouelle circulaire en alliage cuivreux, constituée d’une jante continue reliée au centre par quatre rayons disposés en croix. Les quatre ajours sont relativement réguliers. Le moyeu central est plein et nettement marqué par un petit globule saillant. L’ensemble est de fabrication assez régulière.",
+    "nature": [
+      "Bijoux"
+    ],
+    "epoque": [
+      "Protohistoire"
+    ],
+    "culture": [
+      "Gauloise"
+    ],
+    "matiere": [
+      "Alliage cuivreux"
+    ],
+    "technique": [
+      "Moulé",
+      "Ajouré"
+    ],
+    "decor": [
+      "Géométrique"
+    ],
+    "dateMin": -50,
+    "dateMax": -15
+  },
+  "OBJ-0055": {
+    "designation": "Fusaïole en plomb à pourtour lobé",
+    "particularites": "Petite fusaïole annulaire en plomb, à large perforation centrale et pourtour irrégulièrement lobé. L’épaisseur varie d’environ 4 mm dans les creux à 6 mm au niveau des lobes. La surface présente une patine gris clair à beige caractéristique du plomb oxydé. Malgré son faible diamètre de 21 mm, l’objet atteint un poids de 17 g.",
+    "nature": [
+      "Outils"
+    ],
+    "epoque": [
+      "Moyen Âge"
+    ],
+    "culture": [],
+    "matiere": [
+      "Plomb"
+    ],
+    "technique": [
+      "Moulé"
+    ],
+    "decor": [],
+    "dateMin": 500,
+    "dateMax": 1500
   }
 };

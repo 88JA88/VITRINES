@@ -66,7 +66,10 @@ function objectNumber(id) {
 }
 
 function photoPath(item, suffix = '') {
-  return `photos/${item.id}${suffix}.jpg?v=2`;
+  const declaredPath = String(item?.photo || '').split('?')[0];
+  if (!suffix && declaredPath) return `${declaredPath}?v=2`;
+  const extension = declaredPath.match(/\.([a-z0-9]+)$/i)?.[1] || 'jpg';
+  return `photos/${item.id}${suffix}.${extension}?v=2`;
 }
 
 function updateEditLock() {
@@ -202,7 +205,8 @@ async function photosDeFiche(item) {
     if (!Array.isArray(photos)) throw new Error('Réponse de galerie invalide');
     return { photos, editable: true };
   } catch {
-    return { photos: [{ nom: `${item.id}.jpg`, url: photoPath(item), principale: true }], editable: false };
+    const extension = String(item?.photo || '').match(/\.([a-z0-9]+)(?:\?|$)/i)?.[1] || 'jpg';
+    return { photos: [{ nom: `${item.id}.${extension}`, url: photoPath(item), principale: true }], editable: false };
   }
 }
 
@@ -495,9 +499,18 @@ async function loadPlacementState({ announce = true } = {}) {
     reservedIds = restored.reserve;
     if (announce) setStorageStatus('✓ Placements chargés depuis le Mac');
   } catch {
-    placements = [];
-    reservedIds = new Set();
-    throw new Error('Placements du Mac indisponibles');
+    try {
+      const response = await fetch('placements.json', { cache: 'no-store' });
+      if (!response.ok) throw new Error('Copie statique indisponible');
+      const restored = parseState(await response.json());
+      placements = restored.placements;
+      reservedIds = restored.reserve;
+      if (announce) setStorageStatus('✓ Placements publiés chargés');
+    } catch {
+      placements = [];
+      reservedIds = new Set();
+      throw new Error('Placements du Mac indisponibles');
+    }
   }
 }
 
