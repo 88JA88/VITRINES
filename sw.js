@@ -20,6 +20,7 @@ const NETWORK_FIRST = new Set([
   'catalogue.js',
   'recherche.js',
   'placements.json',
+  'photos.json',
 ]);
 
 self.addEventListener('install', (event) => {

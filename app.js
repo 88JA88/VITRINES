@@ -205,6 +205,16 @@ async function photosDeFiche(item) {
     if (!Array.isArray(photos)) throw new Error('Réponse de galerie invalide');
     return { photos, editable: true };
   } catch {
+    try {
+      const manifestResponse = await fetch('photos.json', { cache: 'no-store' });
+      if (manifestResponse.ok) {
+        const manifest = await manifestResponse.json();
+        const names = manifest[item.id] || [];
+        if (names.length) {
+          return { photos: names.map((nom, index) => ({ nom, url: `photos/${nom}`, principale: index === 0 })), editable: false };
+        }
+      }
+    } catch {}
     const extension = String(item?.photo || '').match(/\.([a-z0-9]+)(?:\?|$)/i)?.[1] || 'jpg';
     return { photos: [{ nom: `${item.id}.${extension}`, url: photoPath(item), principale: true }], editable: false };
   }
