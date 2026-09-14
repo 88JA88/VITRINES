@@ -92,8 +92,8 @@ window.RECHERCHE = {
     "dateMax": 1900
   },
   "OBJ-0002": {
-    "designation": "Fibule dragonesque émaillée",
-    "particularites": "Plaque plate dessinant un S, terminée par deux têtes animales opposées avec de grands appendices comparables à des oreilles et des museaux recourbés. La face porte des cellules circulaires avec des restes d’émail rouges ou orangés, bleus et turquoise. Au revers, l’épingle s’enroule autour d’un rétrécissement du corps. Son aspect plus sombre et régulier que celui du corps suggère une restauration ou un remplacement moderne probable.",
+    "designation": "Fibule zoomorphe émaillée en forme de cheval marin",
+    "particularites": "Fibule zoomorphe en alliage cuivreux représentant un cheval marin stylisé. L’avant du corps conserve une tête et une encolure équines redressées ainsi que deux membres antérieurs. Le corps, allongé, est décoré de plusieurs loges ayant conservé des émaux polychromes, notamment orangés, bleus et verdâtres. L’arrière du corps se termine par une large queue en éventail, caractéristique de la représentation du cheval marin.",
     "nature": [
       "Fibules"
     ],
@@ -115,12 +115,12 @@ window.RECHERCHE = {
     "decor": [
       "Zoomorphe"
     ],
-    "dateMin": 75,
-    "dateMax": 175
+    "dateMin": 60,
+    "dateMax": 260
   },
   "OBJ-0003": {
-    "designation": "Fibule discoïdale émaillée",
-    "particularites": "Fibule en disque à décor concentrique, avec bosse centrale et compartiments radiaux conservant des traces d’émail orange et sombre. Le revers conserve la charnière et le porte-ardillon ; l’ardillon est perdu.",
+    "designation": "Fibule circulaire émaillée à bouton central et décor rayonnant",
+    "particularites": "Fibule circulaire en alliage cuivreux organisée autour d’un bouton central saillant. La face présente plusieurs zones concentriques et un décor rayonnant compartimenté conservant des émaux orange et sombres. Un appendice circulaire est encore visible sur le pourtour ; d’autres appendices périphériques ont probablement disparu. Le revers conserve la charnière et le porte-ardillon ; l’ardillon est perdu.",
     "nature": [
       "Fibules"
     ],
@@ -128,7 +128,7 @@ window.RECHERCHE = {
       "Antiquité"
     ],
     "culture": [
-      "Gallo-romaine"
+      "Romaine"
     ],
     "matiere": [
       "Alliage cuivreux",
@@ -140,8 +140,8 @@ window.RECHERCHE = {
     "decor": [
       "Géométrique"
     ],
-    "dateMin": 100,
-    "dateMax": 250
+    "dateMin": 125,
+    "dateMax": 300
   },
   "OBJ-0004": {
     "designation": "Plaque de boucle / garniture de ceinture à décor d’ocelles, probable",
@@ -268,8 +268,8 @@ window.RECHERCHE = {
     "dateMax": 300
   },
   "OBJ-0009": {
-    "designation": "Fibule-plaque rectangulaire émaillée à décor géométrique",
-    "particularites": "Petite fibule-plaque allongée, centrée sur une plaque rectangulaire bordée de moulures. La face conserve une succession de petits motifs losangiques ou cruciformes et des traces d’émail clair. Le profil est nettement arqué. Le système d’attache au revers est incomplet.",
+    "designation": "Fibule romaine émaillée à arc rectangulaire et motifs en X",
+    "particularites": "Fibule en alliage cuivreux à arc formé d’une plaque rectangulaire allongée, encadrée par des moulures. La face est ornée d’une succession longitudinale de motifs en X destinés à recevoir de l’émail, dont quelques traces restent visibles. Le pied se rétrécit au-delà de la plaque et porte un décor mouluré. Le système d’attache au revers est incomplet.",
     "nature": [
       "Fibules"
     ],
@@ -284,17 +284,18 @@ window.RECHERCHE = {
       "Émail"
     ],
     "technique": [
+      "Moulé",
       "Émaillé"
     ],
     "decor": [
       "Géométrique"
     ],
-    "dateMin": 100,
-    "dateMax": 300
+    "dateMin": 75,
+    "dateMax": 100
   },
   "OBJ-0010": {
-    "designation": "Fibule à plaque losangique émaillée",
-    "particularites": "Petite fibule organisée autour d’une plaque centrale losangique divisée en quatre compartiments, avec des traces d’émail verdâtre et rouge. Une extrémité présente un décor annulaire et les bordures de petites moulures. L’ardillon est conservé au revers.",
+    "designation": "Fibule romaine à plaque losangique émaillée et terminal zoomorphe",
+    "particularites": "Petite fibule en alliage cuivreux organisée autour d’une plaque centrale losangique divisée en quatre compartiments émaillés, avec des traces verdâtres et rouges. Les bordures sont soulignées par de fines moulures. Une extrémité se prolonge par un terminal zoomorphe : deux petits cercles pointés figurent les yeux et le cou porte un décor régulier en chevrons ou écailles. L’ardillon est conservé au revers.",
     "nature": [
       "Fibules"
     ],
@@ -309,13 +310,15 @@ window.RECHERCHE = {
       "Émail"
     ],
     "technique": [
+      "Moulé",
       "Émaillé"
     ],
     "decor": [
-      "Géométrique"
+      "Géométrique",
+      "Zoomorphe"
     ],
     "dateMin": 100,
-    "dateMax": 300
+    "dateMax": 200
   },
   "OBJ-0011": {
     "designation": "Fibule arquée à décor d’ocelles",
@@ -458,18 +461,16 @@ window.RECHERCHE = {
     "dateMax": 900
   },
   "OBJ-0017": {
-    "designation": "Petite applique aviforme franque à tenon de fixation",
-    "particularites": "Petite applique figurant un oiseau au corps très allongé et à la tête relevée. Le revers présente un tenon rectangulaire massif, incompatible avec le système d’attache habituel d’une fibule. Un petit reste métallique doré visible sur la surface est compatible avec un vestige de dorure ancienne.",
+    "designation": "Fibule zoomorphe en forme d’oiseau, pigeon ou colombe probable",
+    "particularites": "Petite fibule zoomorphe en alliage cuivreux représentant un oiseau au corps allongé traité en relief, avec une petite tête redressée. La silhouette évoque un pigeon ou une colombe. Le revers porte une forte plaquette rectangulaire appartenant probablement au dispositif d’articulation de la broche. Un petit éclat métallique doré subsiste sur la surface et paraît compatible avec un vestige de dorure ancienne.",
     "nature": [
-      "Parures vestimentaires"
+      "Fibules"
     ],
     "epoque": [
+      "Antiquité",
       "Haut Moyen Âge"
     ],
-    "culture": [
-      "Barbare",
-      "Mérovingienne"
-    ],
+    "culture": [],
     "matiere": [
       "Alliage cuivreux"
     ],
@@ -479,22 +480,19 @@ window.RECHERCHE = {
     "decor": [
       "Zoomorphe"
     ],
-    "dateMin": 500,
-    "dateMax": 600
+    "dateMin": 400,
+    "dateMax": 650
   },
   "OBJ-0018": {
-    "designation": "Fibule aviforme franque à ailes déployées",
-    "particularites": "Petite fibule représentant un oiseau aux ailes largement déployées. Le corps est allongé et la queue bifide. Le revers conserve un dispositif de broche bien lisible avec élément de charnière et ardillon.",
+    "designation": "Fibule zoomorphe en forme d’oiseau aux ailes déployées",
+    "particularites": "Petite fibule zoomorphe en alliage cuivreux représentant un oiseau aux ailes déployées. Le corps forme un axe central fortement relevé, prolongé par une tête redressée, tandis que les ailes sont larges, plates et écartées de part et d’autre. L’extrémité opposée forme une partie triangulaire correspondant à la queue. Le revers conserve un dispositif de broche bien lisible avec ardillon.",
     "nature": [
       "Fibules"
     ],
     "epoque": [
       "Haut Moyen Âge"
     ],
-    "culture": [
-      "Barbare",
-      "Mérovingienne"
-    ],
+    "culture": [],
     "matiere": [
       "Alliage cuivreux"
     ],
@@ -504,8 +502,8 @@ window.RECHERCHE = {
     "decor": [
       "Zoomorphe"
     ],
-    "dateMin": 400,
-    "dateMax": 600
+    "dateMin": 500,
+    "dateMax": 800
   },
   "OBJ-0019": {
     "designation": "Fibule aviforme, oiseau terrestre, perdrix probable",
@@ -533,13 +531,17 @@ window.RECHERCHE = {
     "dateMax": 600
   },
   "OBJ-0020": {
-    "designation": "Fibule zoomorphe, tête de canard très probable",
-    "particularites": "Petite fibule zoomorphe au corps allongé et bombé. Dans le sens de lecture retenu, une extrémité forme un bec large et aplati, suivi d’un bombement correspondant à la tête puis d’un rétrécissement évoquant le cou. Le revers conserve les éléments du système d’attache.",
+    "designation": "Fibule zoomorphe romaine en forme d’anatidé, canard probable",
+    "particularites": "Petite fibule zoomorphe au corps allongé et bombé. Une extrémité forme un bec large et aplati, suivi d’une tête arrondie et d’un rétrécissement évoquant le cou d’un oiseau aquatique. Le revers conserve les éléments du système d’attache.",
     "nature": [
       "Fibules"
     ],
-    "epoque": [],
-    "culture": [],
+    "epoque": [
+      "Antiquité"
+    ],
+    "culture": [
+      "Romaine"
+    ],
     "matiere": [
       "Alliage cuivreux"
     ],
@@ -549,8 +551,8 @@ window.RECHERCHE = {
     "decor": [
       "Zoomorphe"
     ],
-    "dateMin": null,
-    "dateMax": null
+    "dateMin": 100,
+    "dateMax": 300
   },
   "OBJ-0021": {
     "designation": "Pendant de harnais en forme de croissant à décor d’ocelles",
@@ -727,30 +729,24 @@ window.RECHERCHE = {
     "dateMax": 80
   },
   "OBJ-0028": {
-    "designation": "Fragment probable de fibule à lunettes en bronze",
-    "particularites": "Élément en alliage cuivreux constitué d’une tige d’environ 2 mm enroulée régulièrement en spirale plane de 28 mm. Une seule spirale est conservée ; la seconde et le système d’attache manquent.",
+    "designation": "Fragment de fibule à double spirale",
+    "particularites": "Fragment constitué d’une tige métallique d’environ 2 mm de diamètre, enroulée régulièrement en spirale plane de 28 mm. Une seule spirale est conservée. La seconde spirale, la liaison centrale et le système d’attache ont disparu.",
     "nature": [
       "Fibules"
     ],
     "epoque": [
       "Protohistoire"
     ],
-    "culture": [
-      "Protohistoire européenne"
-    ],
+    "culture": [],
     "matiere": [
-      "Alliage cuivreux",
-      "Bronze"
+      "Alliage cuivreux"
     ],
-    "technique": [
-      "tige enroulée ; mise en forme probable par martelage et pliage"
-    ],
+    "technique": [],
     "decor": [
-      "Géométrique",
-      "Spiralé"
+      "Géométrique"
     ],
-    "dateMin": -900,
-    "dateMax": -650
+    "dateMin": -800,
+    "dateMax": -450
   },
   "OBJ-0029": {
     "designation": "Fibule romaine à charnière, type Hod Hill probable",
@@ -961,8 +957,8 @@ window.RECHERCHE = {
     "dateMax": 400
   },
   "OBJ-0037": {
-    "designation": "Fibule discoïde ajourée à décor rayonnant, romaine",
-    "particularites": "Grande fibule discoïde en alliage cuivreux, moulée et largement ajourée. Le décor s’organise autour d’un moyeu central d’où partent huit branches courbes rayonnantes. Le bord extérieur est rythmé par une série régulière de petites saillies. Le revers conserve le support de l’ardillon et le porte-ardillon opposé.",
+    "designation": "Fibule circulaire ajourée à décor tournant, variante à six branches",
+    "particularites": "Grande fibule circulaire en alliage cuivreux, moulée et largement ajourée. Le décor s’organise autour d’un centre plein d’où partent six branches courbes disposées en mouvement tournant. Le contour extérieur circulaire est rythmé par de petites excroissances ou dents régulièrement réparties. Le revers conserve les éléments du système d’attache.",
     "nature": [
       "Fibules"
     ],
@@ -981,11 +977,10 @@ window.RECHERCHE = {
     ],
     "decor": [
       "Géométrique",
-      "Rayonnant",
-      "Roue"
+      "Curviligne"
     ],
-    "dateMin": 50,
-    "dateMax": 200
+    "dateMin": 150,
+    "dateMax": 250
   },
   "OBJ-0038": {
     "designation": "Applique circulaire émaillée à décor concentrique, romaine",
@@ -1016,8 +1011,8 @@ window.RECHERCHE = {
     "dateMax": 250
   },
   "OBJ-0039": {
-    "designation": "Fibule discoïde ajourée à motif de tourbillon à six branches, romaine",
-    "particularites": "Fibule discoïde en alliage cuivreux, moulée et largement ajourée. Le décor s’organise autour d’un centre plein d’où partent six branches courbes disposées en mouvement tournant. Leurs extrémités élargies évoquent des motifs de trompette. Le revers conserve l’articulation de l’ardillon et le porte-ardillon opposé ; l’ardillon est perdu.",
+    "designation": "Fibule circulaire ajourée à décor tournant à trois branches",
+    "particularites": "Petite fibule circulaire en alliage cuivreux, moulée et ajourée. Le décor est organisé autour de trois branches courbes partant du centre et s’enroulant vers la périphérie. L’exécution du motif est irrégulière : deux enroulements sont mal dégagés et paraissent malencontreusement réunis au centre, ce qui brouille la lecture de la composition. Le revers conserve les éléments du système d’attache ; l’ardillon est perdu.",
     "nature": [
       "Fibules"
     ],
@@ -1036,9 +1031,7 @@ window.RECHERCHE = {
     ],
     "decor": [
       "Géométrique",
-      "Curviligne",
-      "Tourbillon à six branches",
-      "Romano-celtique"
+      "Curviligne"
     ],
     "dateMin": 100,
     "dateMax": 200
@@ -1140,8 +1133,8 @@ window.RECHERCHE = {
     "dateMax": 1450
   },
   "OBJ-0044": {
-    "designation": "Fibule romaine tardive en arbalète à boutons d’oignon, type Keller 4A probable",
-    "particularites": "Fibule cruciforme tardive à arc fortement cintré, longue plaque de pied et barre transversale terminée par trois gros boutons globulaires caractéristiques dits boutons d’oignon. Le pied porte un décor de petits cercles ou ocelles. Le système de fixation est largement conservé.",
+    "designation": "Fibule cruciforme romaine tardive à boutons d’oignon",
+    "particularites": "Fibule cruciforme en alliage cuivreux à arc fortement cintré, longue plaque de pied et barre transversale terminée par trois gros boutons globulaires caractéristiques dits boutons d’oignon. Le pied est chanfreiné et porte un décor de petits cercles ou ocelles. Le long porte-ardillon est conservé sous le pied. Aucun dispositif particulier de verrouillage de l’ardillon n’est visible.",
     "nature": [
       "Fibules"
     ],
@@ -1162,8 +1155,8 @@ window.RECHERCHE = {
       "Ocelles",
       "Boutons globulaires"
     ],
-    "dateMin": 330,
-    "dateMax": 400
+    "dateMin": 350,
+    "dateMax": 410
   },
   "OBJ-0045": {
     "designation": "Anneau de pouce d’archer à palette triangulaire gravée",
@@ -1213,30 +1206,26 @@ window.RECHERCHE = {
     "dateMax": -500
   },
   "OBJ-0047": {
-    "designation": "Fibule pénannulaire de type pied d’oie, époque viking",
-    "particularites": "Fibule pénannulaire en alliage cuivreux composée d’un anneau ouvert d’environ 26 mm de diamètre et de deux grands terminaux triangulaires aplatis. Les palettes sont couvertes d’un décor géométrique poinçonné composé principalement de petits cercles ou ocelles disposés en lignes. Le long ardillon est conservé et s’enroule autour de l’anneau.",
+    "designation": "Fibule oméga à deux plaques triangulaires ornées de bossettes",
+    "particularites": "Grande fibule pénannulaire en alliage cuivreux composée d’un anneau ouvert, d’un long ardillon mobile enroulé autour du jonc et de deux larges plaques terminales triangulaires symétriques. Les plaques sont ornées de rangées de bossettes hémisphériques en relief. L’ensemble appartient à la famille des fibules oméga de type syulgam.",
     "nature": [
       "Fibules"
     ],
     "epoque": [
-      "Haut Moyen Âge"
+      "Moyen Âge"
     ],
-    "culture": [
-      "Scandinave"
-    ],
+    "culture": [],
     "matiere": [
       "Alliage cuivreux"
     ],
     "technique": [
-      "Moulé",
-      "Poinçonné"
+      "Moulé"
     ],
     "decor": [
-      "Géométrique",
-      "Ocelles"
+      "Géométrique"
     ],
-    "dateMin": 800,
-    "dateMax": 1100
+    "dateMin": 1100,
+    "dateMax": 1400
   },
   "OBJ-0048": {
     "designation": "Bracelet en verre vert à pastilles brun-rouge appliquées",
@@ -1262,5 +1251,127 @@ window.RECHERCHE = {
     ],
     "dateMin": 800,
     "dateMax": 1500
+  },
+  "OBJ-0049": {
+    "designation": "Fibule romaine tardive en forme de svastika à têtes de cheval stylisées",
+    "particularites": "Fibule en forme de svastika à quatre têtes de cheval stylisées ; vestige de charnière d’ardillon ; décor en relief ; patine verte.",
+    "nature": [
+      "Objets militaires"
+    ],
+    "epoque": [
+      "Antiquité tardive"
+    ],
+    "culture": [
+      "Romaine"
+    ],
+    "matiere": [
+      "Alliage cuivreux"
+    ],
+    "technique": [
+      "Moulé",
+      "Incisé"
+    ],
+    "decor": [
+      "Zoomorphe"
+    ],
+    "dateMin": 200,
+    "dateMax": 400
+  },
+  "OBJ-0050": {
+    "designation": "Fibule romaine émaillée à plaque rectangulaire quadripartite et fleurons à quatre pétales",
+    "particularites": "Fibule romaine en alliage cuivreux à arc fortement cintré. La partie principale forme une plaque rectangulaire divisée en quatre quartiers par des séparations orthogonales. Les bordures et les séparations portent un décor finement guilloché ou ponctué. Dans plusieurs quartiers, on distingue nettement des loges en forme de fleurons à quatre pétales, aujourd’hui très altérées, qui recevaient à l’origine un décor émaillé. Le pied, étroit et allongé, se termine par un petit bouton mouluré. La surface conserve par endroits un aspect gris argenté pouvant correspondre à un ancien étamage, sans que ce traitement puisse être affirmé avec certitude.",
+    "nature": [
+      "Fibules"
+    ],
+    "epoque": [
+      "Antiquité"
+    ],
+    "culture": [
+      "Romaine"
+    ],
+    "matiere": [
+      "Alliage cuivreux",
+      "Émail"
+    ],
+    "technique": [
+      "Moulé",
+      "Émaillé"
+    ],
+    "decor": [
+      "Géométrique"
+    ],
+    "dateMin": 60,
+    "dateMax": 125
+  },
+  "OBJ-0051": {
+    "designation": "Fibule émaillée losangique à triangles",
+    "particularites": "Fibule à charnière en alliage cuivreux, à corps losangique formé de deux triangles accolés par leur base. La face est divisée en petites logettes triangulaires disposées en registres réguliers, plusieurs ayant conservé des traces d’émail. La tête est marquée par une barre transversale cylindrique. Le pied, court et étroit, se termine par un petit bouton.",
+    "nature": [
+      "Fibules"
+    ],
+    "epoque": [
+      "Antiquité"
+    ],
+    "culture": [
+      "Romaine"
+    ],
+    "matiere": [
+      "Alliage cuivreux",
+      "Émail"
+    ],
+    "technique": [
+      "Moulé",
+      "Émaillé"
+    ],
+    "decor": [
+      "Géométrique"
+    ],
+    "dateMin": 70,
+    "dateMax": 100
+  },
+  "OBJ-0052": {
+    "designation": "Petite pince romaine probable en alliage cuivreux à ressort annulaire",
+    "particularites": "Petite pince en alliage cuivreux constituée de deux branches parallèles réunies à une extrémité par une large boucle circulaire formant ressort. La pression exercée sur les branches permettait de rapprocher leurs extrémités. L'objet est de petites dimensions, 49 x 21 mm, et ne présente pas de décor visible.",
+    "nature": [
+      "Outils"
+    ],
+    "epoque": [
+      "Antiquité"
+    ],
+    "culture": [
+      "Romaine"
+    ],
+    "matiere": [
+      "Alliage cuivreux"
+    ],
+    "technique": [],
+    "decor": [],
+    "dateMin": 1,
+    "dateMax": 400
+  },
+  "OBJ-0053": {
+    "designation": "Rouelle à quatre rayons et moyeu plein, celtique probable",
+    "particularites": "Petite rouelle circulaire en alliage cuivreux constituée d’une jante périphérique épaisse et continue reliée à un moyeu central plein et saillant par quatre rayons. Ceux-ci délimitent quatre ajours irréguliers, approximativement triangulaires ou arrondis. Le moyeu n’est pas perforé. Le contour extérieur, les rayons et les ajours présentent de légères irrégularités compatibles avec une fabrication par moulage. Aucun dispositif évident de suspension ou de fixation n’est visible.",
+    "nature": [
+      "Bijoux"
+    ],
+    "epoque": [
+      "Protohistoire"
+    ],
+    "culture": [
+      "Gauloise"
+    ],
+    "matiere": [
+      "Alliage cuivreux"
+    ],
+    "technique": [
+      "Moulé",
+      "Ajouré"
+    ],
+    "decor": [
+      "Géométrique"
+    ],
+    "dateMin": -200,
+    "dateMax": -30
   }
 };

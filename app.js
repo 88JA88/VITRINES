@@ -39,6 +39,8 @@ const moveButton = document.querySelector('#move-button');
 const removeButton = document.querySelector('#remove-button');
 const cabinetButtons = document.querySelectorAll('[data-cabinet]');
 const shelfButtons = document.querySelectorAll('[data-shelf]');
+const lockButton = document.querySelector('#lock-button');
+const undoButton = document.querySelector('#undo-button');
 
 let catalogue = [];
 let catalogueFilter = 'all';
@@ -53,6 +55,8 @@ let reservedIds = new Set();
 let headingScroll = null;
 const placementClientId = globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`;
 let placementEvents = null;
+let editingUnlocked = false;
+let undoPlacementState = null;
 
 const rows = ['A', 'B', 'C', 'D', 'E'];
 const columns = [1, 2, 3, 4, 5];
@@ -63,6 +67,33 @@ function objectNumber(id) {
 
 function photoPath(item, suffix = '') {
   return `photos/${item.id}${suffix}.jpg?v=2`;
+}
+
+function updateEditLock() {
+  lockButton.textContent = editingUnlocked ? '🔒 Verrouiller' : '🔓 Déverrouiller';
+  lockButton.setAttribute('aria-pressed', String(editingUnlocked));
+  lockButton.title = editingUnlocked ? 'Verrouiller les fonctions de modification' : 'Déverrouiller les fonctions de modification';
+  updatePlaceButton();
+  updateUndoButton();
+  document.querySelectorAll('.fiche-photo-actions button, .fiche-gallery-add button, .fiche-photo-description-input').forEach((button) => {
+    button.disabled = !editingUnlocked;
+  });
+}
+
+function copyPlacementState(currentPlacements = placements, currentReservedIds = reservedIds) {
+  return {
+    placements: currentPlacements.map((placement) => ({ ...placement, zones: [...placement.zones] })),
+    reserve: new Set(currentReservedIds),
+  };
+}
+
+function rememberPlacementState(previousState = copyPlacementState()) {
+  undoPlacementState = previousState;
+  updateUndoButton();
+}
+
+function updateUndoButton() {
+  undoButton.disabled = !editingUnlocked || !undoPlacementState;
 }
 
 function displayValue(value) {
@@ -209,24 +240,14 @@ async function afficherGalerie(item, photoSection, version) {
     for (const [index, photo] of photos.entries()) {
       const figure = creerImageGalerie(photo, item.designation);
       if (editable && !photo.principale) {
-        const complements = photos.filter((candidate) => !candidate.principale);
-        const positionComplement = complements.findIndex((candidate) => candidate.nom === photo.nom);
         const actions = document.createElement('div');
         actions.className = 'fiche-photo-actions';
-        const monter = document.createElement('button');
-        monter.type = 'button';
-        monter.textContent = '↑';
-        monter.title = 'Déplacer cette photo vers la gauche';
-        monter.disabled = positionComplement === 0;
-        const descendre = document.createElement('button');
-        descendre.type = 'button';
-        descendre.textContent = '↓';
-        descendre.title = 'Déplacer cette photo vers la droite';
-        descendre.disabled = positionComplement === complements.length - 1;
         const supprimer = document.createElement('button');
         supprimer.type = 'button';
-        supprimer.textContent = 'Supprimer';
+        supprimer.textContent = '×';
         supprimer.className = 'fiche-photo-delete';
+        supprimer.title = 'Supprimer cette photo complémentaire';
+        supprimer.setAttribute('aria-label', 'Supprimer cette photo complémentaire');
         supprimer.addEventListener('click', async () => {
           if (!window.confirm('Supprimer cette photo complémentaire ?')) return;
           const response = await fetch(`/api/photos/${encodeURIComponent(item.id)}/${encodeURIComponent(photo.nom)}`, { method: 'DELETE' });
@@ -237,26 +258,14 @@ async function afficherGalerie(item, photoSection, version) {
           statut.textContent = '';
           await actualiser();
         });
-        const deplacer = async (offset) => {
-          const position = complements.findIndex((candidate) => candidate.nom === photo.nom);
-          [complements[position], complements[position + offset]] = [complements[position + offset], complements[position]];
-          const response = await fetch(`/api/photos/${encodeURIComponent(item.id)}/ordre`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(complements.map((candidate) => candidate.nom)),
-          });
-          if (!response.ok) {
-            statut.textContent = 'L’ordre des photos n’a pas pu être enregistré.';
-            return;
-          }
-          statut.textContent = '';
-          await actualiser();
-        };
-        monter.addEventListener('click', () => deplacer(-1));
-        descendre.addEventListener('click', () => deplacer(1));
-        actions.append(monter, descendre, supprimer);
+        actions.append(supprimer);
         figure.append(actions);
+
       }
+      const descriptionText = document.createElement('figcaption');
+      descriptionText.className = 'fiche-photo-description-text';
+      descriptionText.textContent = photo.description || '';
+      figure.append(descriptionText);
       galerie.append(figure);
     }
 
@@ -291,7 +300,38 @@ async function afficherGalerie(item, photoSection, version) {
       }
     });
     ajout.append(choisir, input);
+    for (const [index, photo] of photos.entries()) {
+      const descriptionInput = document.createElement('input');
+      descriptionInput.type = 'text';
+      descriptionInput.className = 'fiche-photo-description-input';
+      descriptionInput.maxLength = 1000;
+      descriptionInput.placeholder = `Description photo ${index + 1}`;
+      descriptionInput.setAttribute('aria-label', `Description de la photo ${index + 1}`);
+      descriptionInput.value = photo.description || '';
+      descriptionInput.addEventListener('change', async () => {
+        const description = descriptionInput.value.trim();
+        descriptionInput.disabled = true;
+        try {
+          const response = await fetch(`/api/photos/${encodeURIComponent(item.id)}/${encodeURIComponent(photo.nom)}/description`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ description }),
+          });
+          if (!response.ok) throw new Error('Enregistrement impossible');
+          descriptionInput.value = description;
+          const descriptionText = galerie.children[index]?.querySelector('.fiche-photo-description-text');
+          if (descriptionText) descriptionText.textContent = description;
+          statut.textContent = '';
+        } catch {
+          statut.textContent = 'La description de la photo n’a pas pu être enregistrée.';
+        } finally {
+          descriptionInput.disabled = !editingUnlocked;
+        }
+      });
+      ajout.append(descriptionInput);
+    }
     photoSection.append(ajout);
+    updateEditLock();
   };
 
   dessiner();
@@ -361,6 +401,11 @@ function renderFiche(item) {
   analyse.className = 'fiche-text';
   appendFreeText(analyse, item.texteAnalyse);
   appendFicheSection(ficheContent, 'Documentation et notes', analyse);
+
+  const source = document.createElement('div');
+  source.className = 'fiche-text fiche-source';
+  appendFreeText(source, item.source);
+  appendFicheSection(ficheContent, 'Sources', source, 'fiche-sources');
 
   void afficherGalerie(item, photoSection, version);
 }
@@ -474,6 +519,8 @@ function startPlacementUpdates() {
     } catch {
       return;
     }
+    undoPlacementState = null;
+    updateUndoButton();
     await refreshPlacementGrid();
   });
 }
@@ -492,9 +539,9 @@ function placementLabel(placement) {
 
 function updatePlaceButton() {
   const placement = placementFor(selectedId);
-  placeButton.disabled = !selectedId || selectedZones.length === 0 || hasActivePlacement(selectedId);
-  moveButton.disabled = !selectedId || selectedZones.length === 0 || !placement;
-  removeButton.disabled = !placement;
+  placeButton.disabled = !editingUnlocked || !selectedId || selectedZones.length === 0 || hasActivePlacement(selectedId);
+  moveButton.disabled = !editingUnlocked || !selectedId || selectedZones.length === 0 || !placement;
+  removeButton.disabled = !editingUnlocked || !placement;
 }
 
 function renderPresentStrip() {
@@ -886,8 +933,10 @@ planHeading.addEventListener('pointerup', () => { headingScroll = null; });
 planHeading.addEventListener('pointercancel', () => { headingScroll = null; });
 
 placeButton.addEventListener('click', async () => {
+  if (!editingUnlocked) return;
   if (!selectedId || selectedZones.length === 0 || hasActivePlacement(selectedId)) return;
   const nextReservedIds = new Set(reservedIds);
+  const previousState = copyPlacementState();
   nextReservedIds.delete(selectedId);
   const nextPlacements = [...placements, {
     objectId: selectedId,
@@ -899,12 +948,15 @@ placeButton.addEventListener('click', async () => {
   if (!await savePlacementState(nextPlacements, nextReservedIds)) return;
   placements = nextPlacements;
   reservedIds = nextReservedIds;
+  rememberPlacementState(previousState);
   selectObject(selectedId);
 });
 
 moveButton.addEventListener('click', async () => {
+  if (!editingUnlocked) return;
   const placement = placementFor(selectedId);
   if (!placement || selectedZones.length === 0) return;
+  const previousState = copyPlacementState();
   const nextPlacements = placements.map((candidate) => candidate.objectId === selectedId ? {
     ...candidate,
     cabinet,
@@ -914,17 +966,21 @@ moveButton.addEventListener('click', async () => {
   } : candidate);
   if (!await savePlacementState(nextPlacements, reservedIds)) return;
   placements = nextPlacements;
+  rememberPlacementState(previousState);
   selectObject(selectedId);
 });
 
 removeButton.addEventListener('click', async () => {
+  if (!editingUnlocked) return;
   if (!placementFor(selectedId)) return;
+  const previousState = copyPlacementState();
   const nextPlacements = placements.filter((placement) => placement.objectId !== selectedId);
   const nextReservedIds = new Set(reservedIds);
   nextReservedIds.add(selectedId);
   if (!await savePlacementState(nextPlacements, nextReservedIds)) return;
   placements = nextPlacements;
   reservedIds = nextReservedIds;
+  rememberPlacementState(previousState);
   selectedZones = [];
   selectObject(selectedId);
 });
@@ -951,7 +1007,7 @@ function readFileAsText(file) {
 }
 
 backupButton.addEventListener('click', () => downloadState(stateForExport()));
-restoreButton.addEventListener('click', () => restoreInput.click());
+restoreButton.addEventListener('click', () => { if (editingUnlocked) restoreInput.click(); });
 restoreInput.addEventListener('change', async () => {
   const file = restoreInput.files?.[0];
   restoreInput.value = '';
@@ -963,6 +1019,8 @@ restoreInput.addEventListener('change', async () => {
     if (!await savePlacementState(restored.placements, restored.reserve)) throw new Error('Le Mac n’a pas confirmé la restauration.');
     placements = restored.placements;
     reservedIds = restored.reserve;
+    undoPlacementState = null;
+    updateUndoButton();
     selectedId = null;
     selectedZones = [];
     renderEmptySelection();
@@ -980,8 +1038,18 @@ async function loadCatalogue() {
     catalogue = [...window.CATALOGUE].sort((left, right) => objectNumber(left.id) - objectNumber(right.id));
     countBadge.textContent = catalogue.length;
     catalogueCount.textContent = `${catalogue.length} objets du catalogue`;
-    await loadPlacementState();
     renderResearchCriteria();
+    renderList();
+    renderPlan();
+
+    // Le catalogue reste utilisable même si le fichier local de placements
+    // est absent, illisible ou invalide. Les placements seront rechargés dès
+    // que le serveur pourra à nouveau les fournir.
+    try {
+      await loadPlacementState();
+    } catch (error) {
+      setStorageStatus(`⚠ ${error.message} — utilisation sans synchronisation`);
+    }
     renderList();
     renderPlan();
     startPlacementUpdates();
@@ -1003,6 +1071,26 @@ sortToggle.addEventListener('click', () => {
   renderList();
 });
 researchInput.addEventListener('input', renderList);
+lockButton.addEventListener('click', () => {
+  editingUnlocked = !editingUnlocked;
+  updateEditLock();
+  setStorageStatus(editingUnlocked ? '⚠ Modification déverrouillée' : '✓ Fonctions de modification verrouillées');
+});
+undoButton.addEventListener('click', async () => {
+  if (!editingUnlocked || !undoPlacementState) return;
+  const previousState = undoPlacementState;
+  if (!await savePlacementState(previousState.placements, previousState.reserve)) return;
+  placements = previousState.placements;
+  reservedIds = previousState.reserve;
+  undoPlacementState = null;
+  selectedZones = [];
+  updateUndoButton();
+  renderList();
+  renderPlan();
+  updatePlaceButton();
+  setStorageStatus('↶ Dernier placement annulé');
+});
+updateEditLock();
 clearResearch.addEventListener('click', () => {
   researchInput.value = '';
   checkedCriteria.forEach((values) => values.clear());
