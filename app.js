@@ -58,6 +58,12 @@ let placementEvents = null;
 let editingUnlocked = false;
 let undoPlacementState = null;
 
+// La taille choisie reste propre à ce navigateur et à chaque photo : les
+// fichiers originaux, le catalogue et les placements ne sont jamais modifiés.
+const PHOTO_SCALE_STORAGE_KEY = 'vitrines-photo-scales-v1';
+const PHOTO_SCALE_MIN = 0.5;
+const PHOTO_SCALE_MAX = 2;
+
 const rows = ['A', 'B', 'C', 'D', 'E'];
 const columns = [1, 2, 3, 4, 5];
 
@@ -70,6 +76,34 @@ function photoPath(item, suffix = '') {
   if (!suffix && declaredPath) return `${declaredPath}?v=2`;
   const extension = declaredPath.match(/\.([a-z0-9]+)$/i)?.[1] || 'jpg';
   return `photos/${item.id}${suffix}.${extension}?v=2`;
+}
+
+function photoScaleKey(photo) {
+  return `${photo.itemId || ''}:${photo.nom || photo.url || ''}`;
+}
+
+function readPhotoScales() {
+  try {
+    const values = JSON.parse(localStorage.getItem(PHOTO_SCALE_STORAGE_KEY) || '{}');
+    return values && typeof values === 'object' ? values : {};
+  } catch {
+    return {};
+  }
+}
+
+function photoScale(photo) {
+  const value = Number(readPhotoScales()[photoScaleKey(photo)]);
+  return Number.isFinite(value) ? Math.min(PHOTO_SCALE_MAX, Math.max(PHOTO_SCALE_MIN, value)) : 1;
+}
+
+function savePhotoScale(photo, value) {
+  try {
+    const values = readPhotoScales();
+    values[photoScaleKey(photo)] = Number(value.toFixed(3));
+    localStorage.setItem(PHOTO_SCALE_STORAGE_KEY, JSON.stringify(values));
+  } catch {
+    // Le geste reste possible si le navigateur interdit le stockage local.
+  }
 }
 
 function updateEditLock() {
@@ -223,11 +257,58 @@ async function photosDeFiche(item) {
 function creerImageGalerie(photo, designation) {
   const figure = document.createElement('figure');
   figure.className = `fiche-photo${photo.principale ? ' fiche-photo-principale' : ''}`;
+  figure.style.setProperty('--photo-scale', photoScale(photo));
   const image = document.createElement('img');
   image.src = `${photo.url}${photo.url.includes('?') ? '&' : '?'}v=${Date.now()}`;
   image.alt = photo.principale ? designation : `${designation} — vue complémentaire`;
   image.addEventListener('error', () => figure.remove(), { once: true });
   figure.append(image);
+
+  const handles = document.createElement('div');
+  handles.className = 'fiche-photo-resize-handles';
+  for (const corner of ['nw', 'ne', 'se', 'sw']) {
+    const handle = document.createElement('button');
+    handle.type = 'button';
+    handle.className = `fiche-photo-resize-handle handle-${corner}`;
+    handle.setAttribute('aria-label', `Redimensionner la photo (${corner})`);
+    handle.title = 'Redimensionner proportionnellement';
+    handle.addEventListener('pointerdown', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const rect = figure.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const startDistance = Math.hypot(event.clientX - centerX, event.clientY - centerY) || 1;
+      const startScale = photoScale(photo);
+      const pointerId = event.pointerId;
+      handle.setPointerCapture(pointerId);
+
+      const move = (moveEvent) => {
+        if (moveEvent.pointerId !== pointerId) return;
+        const distance = Math.hypot(moveEvent.clientX - centerX, moveEvent.clientY - centerY);
+        const scale = Math.min(PHOTO_SCALE_MAX, Math.max(PHOTO_SCALE_MIN, startScale * distance / startDistance));
+        figure.style.setProperty('--photo-scale', scale);
+        // La taille est inscrite dès le déplacement : elle survit même si le
+        // navigateur n’envoie pas l’événement de relâchement de la poignée.
+        savePhotoScale(photo, scale);
+      };
+      const finish = (endEvent) => {
+        if (endEvent.pointerId !== pointerId) return;
+        const scale = Number(figure.style.getPropertyValue('--photo-scale')) || 1;
+        savePhotoScale(photo, scale);
+        handle.removeEventListener('pointermove', move);
+        handle.removeEventListener('pointerup', finish);
+        handle.removeEventListener('pointercancel', finish);
+        handle.removeEventListener('lostpointercapture', finish);
+      };
+      handle.addEventListener('pointermove', move);
+      handle.addEventListener('pointerup', finish);
+      handle.addEventListener('pointercancel', finish);
+      handle.addEventListener('lostpointercapture', finish);
+    });
+    handles.append(handle);
+  }
+  figure.append(handles);
   return figure;
 }
 
@@ -252,7 +333,7 @@ async function afficherGalerie(item, photoSection, version) {
     galerie.dataset.count = String(photos.length);
     photoSection.hidden = photos.length === 0;
     for (const [index, photo] of photos.entries()) {
-      const figure = creerImageGalerie(photo, item.designation);
+      const figure = creerImageGalerie({ ...photo, itemId: item.id }, item.designation);
       if (editable && !photo.principale) {
         const actions = document.createElement('div');
         actions.className = 'fiche-photo-actions';

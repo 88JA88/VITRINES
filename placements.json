@@ -467,9 +467,9 @@
       "cabinet": "V2",
       "shelf": "E4",
       "zones": [
-        "D3"
+        "A4"
       ],
-      "displayZone": "D3"
+      "displayZone": "A4"
     },
     {
       "id": "OBJ-0049",
@@ -520,6 +520,116 @@
         "A3"
       ],
       "displayZone": "A3"
+    },
+    {
+      "id": "OBJ-0057",
+      "state": "place",
+      "cabinet": "V2",
+      "shelf": "E4",
+      "zones": [
+        "D3"
+      ],
+      "displayZone": "D3"
+    },
+    {
+      "id": "OBJ-0056",
+      "state": "place",
+      "cabinet": "V2",
+      "shelf": "E4",
+      "zones": [
+        "B4"
+      ],
+      "displayZone": "B4"
+    },
+    {
+      "id": "OBJ-0058",
+      "state": "place",
+      "cabinet": "V2",
+      "shelf": "E4",
+      "zones": [
+        "A4"
+      ],
+      "displayZone": "A4"
+    },
+    {
+      "id": "OBJ-0059",
+      "state": "place",
+      "cabinet": "V2",
+      "shelf": "E4",
+      "zones": [
+        "A4"
+      ],
+      "displayZone": "A4"
+    },
+    {
+      "id": "OBJ-0061",
+      "state": "place",
+      "cabinet": "V2",
+      "shelf": "E4",
+      "zones": [
+        "A5"
+      ],
+      "displayZone": "A5"
+    },
+    {
+      "id": "OBJ-0060",
+      "state": "place",
+      "cabinet": "V2",
+      "shelf": "E4",
+      "zones": [
+        "A5"
+      ],
+      "displayZone": "A5"
+    },
+    {
+      "id": "OBJ-0062",
+      "state": "place",
+      "cabinet": "V2",
+      "shelf": "E3",
+      "zones": [
+        "E1"
+      ],
+      "displayZone": "E1"
+    },
+    {
+      "id": "OBJ-0063",
+      "state": "place",
+      "cabinet": "V2",
+      "shelf": "E3",
+      "zones": [
+        "E1"
+      ],
+      "displayZone": "E1"
+    },
+    {
+      "id": "OBJ-0065",
+      "state": "place",
+      "cabinet": "V2",
+      "shelf": "E4",
+      "zones": [
+        "E1"
+      ],
+      "displayZone": "E1"
+    },
+    {
+      "id": "OBJ-0064",
+      "state": "place",
+      "cabinet": "V2",
+      "shelf": "E4",
+      "zones": [
+        "A1"
+      ],
+      "displayZone": "A1"
+    },
+    {
+      "id": "OBJ-0066",
+      "state": "place",
+      "cabinet": "V2",
+      "shelf": "E4",
+      "zones": [
+        "A5"
+      ],
+      "displayZone": "A5"
     },
     {
       "id": "OBJ-0001",

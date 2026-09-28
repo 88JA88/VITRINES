@@ -1,12 +1,12 @@
 'use strict';
 
 // Increment this version whenever a new application version is published.
-const CACHE_NAME = 'vitrines-pwa-v17';
+const CACHE_NAME = 'vitrines-pwa-v19';
 const APP_SHELL = [
   './',
   './index.html',
   './styles.css?v=7',
-  './app.js?v=22',
+  './app.js?v=24',
   './recherche.js?v=9',
   './catalogue.js?v=11',
   './manifest.webmanifest',

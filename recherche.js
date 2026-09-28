@@ -1420,5 +1420,251 @@ window.RECHERCHE = {
     "decor": [],
     "dateMin": 500,
     "dateMax": 1500
+  },
+  "OBJ-0056": {
+    "designation": "Fermail annulaire ou boucle simple, type ARTEFACTS BCC-7002",
+    "particularites": "Anneau circulaire robuste en alliage cuivreux, de section aplatie, portant un long ardillon mobile articulé directement sur le cadre par enroulement. L’ardillon mesure 31 mm et traverse entièrement l’ouverture de l’anneau. Aucun aménagement ou encoche spécifique destiné à recevoir sa pointe n’est nettement visible.",
+    "nature": [
+      "Parures vestimentaires"
+    ],
+    "epoque": [
+      "Moyen Âge",
+      "Époque moderne"
+    ],
+    "culture": [],
+    "matiere": [
+      "Alliage cuivreux"
+    ],
+    "technique": [
+      "Moulé",
+      "Plié"
+    ],
+    "decor": [],
+    "dateMin": 1175,
+    "dateMax": 1600
+  },
+  "OBJ-0057": {
+    "designation": "Clé-bague romaine à rotation, type ARTEFACTS CLE-4129",
+    "particularites": "Bague-clé en bronze constituée d’un anneau massif prolongé latéralement par une courte partie fonctionnelle terminée par un panneton denté. Le panneton comporte plusieurs dents parallèles séparées par des entailles profondes. La construction compacte permettait de porter la clé au doigt tout en conservant une partie active suffisamment développée pour actionner une petite serrure.",
+    "nature": [
+      "Bagues"
+    ],
+    "epoque": [
+      "Antiquité"
+    ],
+    "culture": [
+      "Romaine"
+    ],
+    "matiere": [
+      "Bronze"
+    ],
+    "technique": [
+      "Moulé"
+    ],
+    "decor": [],
+    "dateMin": 100,
+    "dateMax": 300
+  },
+  "OBJ-0058": {
+    "designation": "Bracelet ouvert à extrémités aplaties oculées symbolisant des têtes de serpents",
+    "particularites": "Bracelet ouvert en bronze, d’environ 60 mm de diamètre, constitué d’un jonc fin d’environ 3 mm s’élargissant progressivement vers deux extrémités aplaties d’environ 5 mm. Chacune porte un décor composé de cercles oculés et de traits incisés, organisé de manière à symboliser une tête de serpent.",
+    "nature": [
+      "Bijoux"
+    ],
+    "epoque": [
+      "Antiquité"
+    ],
+    "culture": [
+      "Romaine"
+    ],
+    "matiere": [
+      "Bronze"
+    ],
+    "technique": [
+      "Moulé",
+      "Incisé",
+      "Poinçonné"
+    ],
+    "decor": [
+      "Zoomorphe",
+      "Géométrique"
+    ],
+    "dateMin": 300,
+    "dateMax": 500
+  },
+  "OBJ-0059": {
+    "designation": "Bracelet ouvert en bronze à extrémités recouvrantes aplaties et décor incisé",
+    "particularites": "Bracelet ouvert en bronze d’environ 60 mm de diamètre. Le jonc, relativement fin et de section anguleuse, mesure environ 3 mm et s’élargit progressivement vers deux extrémités aplaties pouvant atteindre environ 7 mm. Les deux extrémités se recouvrent largement et portent plusieurs incisions transversales.",
+    "nature": [
+      "Bijoux"
+    ],
+    "epoque": [
+      "Protohistoire"
+    ],
+    "culture": [
+      "Gauloise"
+    ],
+    "matiere": [
+      "Bronze"
+    ],
+    "technique": [
+      "Incisé"
+    ],
+    "decor": [
+      "Géométrique"
+    ],
+    "dateMin": -450,
+    "dateMax": -250
+  },
+  "OBJ-0060": {
+    "designation": "Fibule romaine à arc non interrompu cannelé, type Feugère 14b1b",
+    "particularites": "Fibule en bronze à arc continu, allongé et rubanné, nettement coudé et épaissi au niveau de la tête. L’arc présente des bords presque parallèles et plusieurs cannelures longitudinales. Le revers conserve le système d’attache avec l’ardillon et un porte-ardillon développé.",
+    "nature": [
+      "Fibules"
+    ],
+    "epoque": [
+      "Antiquité"
+    ],
+    "culture": [
+      "Romaine"
+    ],
+    "matiere": [
+      "Bronze"
+    ],
+    "technique": [
+      "Moulé"
+    ],
+    "decor": [
+      "Géométrique"
+    ],
+    "dateMin": -10,
+    "dateMax": 70
+  },
+  "OBJ-0061": {
+    "designation": "Agrafe de col en bronze ornée d’une coquille Saint-Jacques, type ARTEFACTS AGR-9220",
+    "particularites": "Petite agrafe de vêtement en bronze à corps plat et allongé. Une extrémité est prolongée par un crochet recourbé vers le revers, tandis que l’autre forme une boucle rectangulaire destinée à recevoir l’élément complémentaire de fermeture. La face est ornée en relief d’une coquille Saint-Jacques stylisée, dont les côtes rayonnantes structurent le décor.",
+    "nature": [
+      "Parures vestimentaires"
+    ],
+    "epoque": [
+      "Époque moderne"
+    ],
+    "culture": [],
+    "matiere": [
+      "Bronze"
+    ],
+    "technique": [
+      "Moulé"
+    ],
+    "decor": [],
+    "dateMin": 1500,
+    "dateMax": 1700
+  },
+  "OBJ-0062": {
+    "designation": "Deux épingles de parure romaines en bronze, à têtes différenciées",
+    "particularites": "Ensemble de deux longues épingles de parure en bronze, constituées d’une tige effilée terminée par une pointe et d’une tête différenciée. La première possède une tête nettement moulurée, formée d’un bouton terminal cylindrique précédé de plusieurs renflements et étranglements. La seconde présente une tige plus sobre, progressivement épaissie vers le sommet, qui se termine par une tête allongée et aplatie.",
+    "nature": [
+      "Épingles"
+    ],
+    "epoque": [
+      "Antiquité"
+    ],
+    "culture": [
+      "Romaine"
+    ],
+    "matiere": [
+      "Bronze"
+    ],
+    "technique": [
+      "Moulé"
+    ],
+    "decor": [],
+    "dateMin": 100,
+    "dateMax": 500
+  },
+  "OBJ-0063": {
+    "designation": "Épingle de parure à renflement fusiforme torsadé et tête en trompette, proche du type ARTEFACTS EPG-1038",
+    "particularites": "Longue épingle en bronze à tige fine et progressivement effilée jusqu’à une pointe aiguë. La partie supérieure présente un renflement fusiforme nettement torsadé, suivi d’un court col et d’une petite tête évasée en trompette, terminée par une coupe franche. Cette combinaison distingue nettement la tête de la longue tige fonctionnelle.",
+    "nature": [
+      "Épingles"
+    ],
+    "epoque": [
+      "Protohistoire"
+    ],
+    "culture": [],
+    "matiere": [
+      "Bronze"
+    ],
+    "technique": [
+      "Torsadé"
+    ],
+    "decor": [
+      "Géométrique"
+    ],
+    "dateMin": -1350,
+    "dateMax": -1250
+  },
+  "OBJ-0064": {
+    "designation": "Bracelet filiforme en bronze à extrémités nouées, type ARTEFACTS BRC-4003",
+    "particularites": "Petit bracelet filiforme en bronze d’environ 48 mm de diamètre. Le jonc est parfaitement lisse et relativement fin, son épaisseur variant d’environ 1,5 à 3 mm. Les deux extrémités se croisent et s’enroulent autour du jonc opposé. Entre ces deux enroulements, les fils forment la partie torsadée du dispositif de fermeture.",
+    "nature": [
+      "Bijoux"
+    ],
+    "epoque": [
+      "Antiquité"
+    ],
+    "culture": [
+      "Romaine"
+    ],
+    "matiere": [
+      "Bronze"
+    ],
+    "technique": [
+      "Torsadé"
+    ],
+    "decor": [],
+    "dateMin": -30,
+    "dateMax": 400
+  },
+  "OBJ-0065": {
+    "designation": "Helix en bronze à spires superposées, type ARTEFACTS HEL-3001",
+    "particularites": "Petit objet annulaire en bronze constitué d’un fil enroulé en plusieurs spires superposées. Les différentes spires sont particulièrement visibles de profil et forment un anneau épais et compact. Aucun décor incisé n’est nettement visible sur l’exemplaire.",
+    "nature": [
+      "Bijoux"
+    ],
+    "epoque": [
+      "Protohistoire"
+    ],
+    "culture": [],
+    "matiere": [
+      "Bronze"
+    ],
+    "technique": [],
+    "decor": [],
+    "dateMin": -475,
+    "dateMax": -30
+  },
+  "OBJ-0066": {
+    "designation": "Ferret de ceinture en bronze à deux lamelles, type ARTEFACTS FRT-7014",
+    "particularites": "Ferret de ceinture très allongé, constitué d’un corps rectangulaire formé de deux fines lamelles. Un rivet conservé à l’extrémité supérieure réunissait les lamelles et assurait la fixation sur l’extrémité de la lanière. À l’extrémité opposée, la base est plus épaisse et moulurée, avec des encoches latérales et plusieurs incisions transversales.",
+    "nature": [
+      "Parures vestimentaires"
+    ],
+    "epoque": [
+      "Moyen Âge"
+    ],
+    "culture": [],
+    "matiere": [
+      "Bronze"
+    ],
+    "technique": [
+      "Moulé",
+      "Incisé"
+    ],
+    "decor": [
+      "Géométrique"
+    ],
+    "dateMin": 1350,
+    "dateMax": 1500
   }
 };

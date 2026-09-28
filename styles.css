@@ -138,9 +138,16 @@ h2 { font-size: 24px; }
 .fiche-photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-items: center; }
 .fiche-photos[data-count="1"] { grid-template-columns: 1fr; }
 .fiche-photos[data-count="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.fiche-photo { position: relative; min-width: 0; margin: 0; }
+.fiche-photo { position: relative; min-width: 0; margin: 0; transform: scale(var(--photo-scale, 1)); transform-origin: center; transition: transform 80ms ease-out; }
 .fiche-photos .fiche-photo img { width: 100%; min-height: 190px; max-height: 420px; display: block; border: 1px solid #d5d0c4; border-radius: 10px; background: white; object-fit: contain; }
 .fiche-photos[data-count="1"] .fiche-photo { width: min(100%, 580px); justify-self: center; }
+.fiche-photo-resize-handles { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.fiche-photo-resize-handle { position: absolute; width: 16px; height: 16px; padding: 0; border: 1px solid #6c8e84; border-radius: 50%; background: #f8fcfae8; box-shadow: 0 1px 4px #18372d55; cursor: nwse-resize; opacity: .18; pointer-events: auto; touch-action: none; }
+.fiche-photo-resize-handle:hover, .fiche-photo-resize-handle:focus-visible { opacity: .95; }
+.handle-nw { top: -8px; left: -8px; cursor: nwse-resize; }
+.handle-ne { top: -8px; right: -8px; cursor: nesw-resize; }
+.handle-se { right: -8px; bottom: -8px; cursor: nwse-resize; }
+.handle-sw { bottom: -8px; left: -8px; cursor: nesw-resize; }
 .fiche-photo-actions { position: absolute; top: 8px; right: 8px; z-index: 1; }
 .fiche-photo-actions button, .fiche-gallery-add button { min-height: 32px; padding: 0 10px; border: 1px solid #9bb6ac; border-radius: 7px; background: #edf4f1; color: #215b50; font-size: 12px; font-weight: 700; cursor: pointer; }
 .fiche-photo-actions button:disabled { opacity: .4; cursor: default; }
@@ -166,7 +173,7 @@ h2 { font-size: 24px; }
   body > *:not(.fiche-dialog) { display: none !important; }
   .fiche-dialog[open], .fiche-dialog.printing { position: static !important; display: block !important; width: auto; height: auto !important; min-height: 0 !important; max-width: none; max-height: none !important; overflow: visible !important; border: 0; border-radius: 0; box-shadow: none; }
   .fiche-page { min-height: 0; }
-  .fiche-toolbar, .fiche-photo-actions, .fiche-photo-description-input, .fiche-gallery-add, .fiche-gallery-status { display: none !important; }
+  .fiche-toolbar, .fiche-photo-actions, .fiche-photo-resize-handles, .fiche-photo-description-input, .fiche-gallery-add, .fiche-gallery-status { display: none !important; }
   .fiche-photo-description-text:not(:empty) { display: block; }
   .fiche-content { max-width: none; height: auto; min-height: 0; padding: 0; }
   .fiche-section { break-inside: auto; }
